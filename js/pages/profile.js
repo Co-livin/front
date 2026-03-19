@@ -4,6 +4,8 @@ import {BackButton} from "../components/backButton.js"
 export function renderProfile(){
 
     const app=document.getElementById("app");
+    const login = localStorage.getItem("login");
+    const name = localStorage.getItem("name");
 
     app.innerHTML=`
 
@@ -17,8 +19,8 @@ export function renderProfile(){
         
         <div class="card">
         
-            <p>Name: Alex</p>
-            <p>Email: alex@mail.com</p>
+            <p>Login: ${login}</p>
+            <p>Name: ${name}</p>
             
             <br>
             

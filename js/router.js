@@ -6,19 +6,20 @@ import {renderSpace} from "./pages/space.js"
 import {renderCreateTask} from "./pages/createTask.js"
 import {renderAddUser} from "./pages/addUser.js"
 import {renderProfile} from "./pages/profile.js"
+import {renderJoinSpace} from "./pages/joinSpace.js";
 
 export function router(){
 
     const hash=location.hash;
 
     if(hash.startsWith("#space/")){
-        const id=hash.split("/")[1];
+        const id= parseInt(hash.split("/")[1], 10);
         renderSpace(id);
         return;
     }
 
     if(hash.startsWith("#create-task/")){
-        const id=hash.split("/")[1];
+        const id= parseInt(hash.split("/")[1], 10);
         renderCreateTask(id);
         return;
     }
@@ -43,6 +44,10 @@ export function router(){
 
         case "#profile":
             renderProfile();
+            break;
+
+        case "#join-space":
+            renderJoinSpace();
             break;
 
         default:

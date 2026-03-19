@@ -1,34 +1,24 @@
 import {Navbar} from "../components/navbar.js"
 
-export function renderDashboard(){
+export async function renderDashboard(){
 
-    const spaces=[
-        {id:1,name:"Dorm Room",members:3},
-        {id:2,name:"Apartment",members:4}
-    ];
+    let spaces = await getCurrentSpaces();
 
-    let html="";
-
-    spaces.forEach(space=>{
-
-        html+=`
-
+    const spacesHtml = spaces.map(space => `
         <div class="card">
-        
-            <h3>${space.name}</h3>
-            <p>${space.members} members</p>
             
-            <br>
+                <h3>${space.name}</h3>
+                <p>ID: ${space.id}</p>
+                <p>Code: ${space.invite_code}</p>
+                
+                <br>
+                
+                <button class="button primary" onclick="location.hash='space/${space.id}'">
+                    Open
+                </button>
             
-            <button class="button primary" onclick="location.hash='space/${space.id}'">
-                Open
-            </button>
-        
-        </div>
-        
-        `;
-
-    })
+            </div>
+    `).join('');
 
     const app=document.getElementById("app");
 
@@ -44,11 +34,15 @@ export function renderDashboard(){
             Create Space
         </button>
         
+        <button class="button secondary" onclick="location.hash='join-space'">
+            Join Space
+        </button>
+        
         <br><br>
         
         <div class="grid">
         
-            ${html}
+            ${spacesHtml || "<p>У вас пока нет пространств.</p>"}
         
         </div>
     
@@ -56,4 +50,26 @@ export function renderDashboard(){
     
     `;
 
+}
+
+export async function getCurrentSpaces() {
+    const token = localStorage.getItem("access_token");
+
+    try {
+        const response = await fetch('https://colivin.ru/api/spaces/my', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) throw new Error(await response.text());
+
+        const spaces = await response.json();
+        localStorage.setItem("my_spaces", JSON.stringify(spaces));
+        return spaces;
+    } catch (error) {
+        console.error("Ошибка загрузки пространств:", error);
+    }
 }

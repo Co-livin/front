@@ -14,18 +14,60 @@ export function renderRegister(){
         
             <h2 class="page-title">Register</h2>
             
-            <input class="input" placeholder="Name">
-            <input class="input" placeholder="Email">
-            <input class="input" type="password" placeholder="Password">
+            <form class="register-form">
+                <input class="input" name="login" placeholder="login">
+                <input class="input" name="name" placeholder="name">
+                <input class="input" name="password" type="password" placeholder="password">
             
-            <button class="button primary" onclick="location.hash='dashboard'">
-                Register
-            </button>
-        
+                <button class="button primary" type="submit" id="button-register">
+                    Register
+                </button>
+            </form>
         </div>
     
     </div>
     
     `;
 
+    const form = document.querySelector(".register-form");
+
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            await registerUser(data);
+
+            location.hash = 'login'
+        } catch (error) {
+            alert("Ошибка регистрации, проверьте консоль.");
+        }
+    });
+
+}
+
+export async function registerUser(userData){
+    console.log(JSON.stringify(userData))
+    try {
+        const response = await fetch("https://colivin.ru/api/auth/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "accept": "application/json",
+            },
+            body: JSON.stringify(userData),
+        });
+
+        if (!response.ok) {
+            throw new Error(`Ошибка HTTP: ${response.status}`);
+        }
+
+        const newUser = await response.json();
+        console.log("Новый пользователь:", newUser);
+    } catch (error) {
+        console.error("Ошибка при создании пользователя:", error);
+        throw error;
+    }
 }

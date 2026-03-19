@@ -3,6 +3,7 @@ import {taskCard} from "../components/taskCard.js"
 import {BackButton} from "../components/backButton.js"
 
 export function renderSpace(id){
+    const space = getSpaceById(id)
 
     const tasks=[
         {title:"Take out trash",user:"Alex",due:"Today"},
@@ -25,14 +26,10 @@ export function renderSpace(id){
     
         ${BackButton()}
     
-        <h2 class="page-title">Space ${id}</h2>
+        <h2 class="page-title">Space ${space.name}</h2>
         
         <button class="button secondary" onclick="location.hash='create-task/${id}'">
             Add Task
-        </button>
-        
-        <button class="button secondary" onclick="location.hash='add-user'">
-            Add User
         </button>
         
         <br><br>
@@ -65,4 +62,9 @@ export function renderSpace(id){
     
     `;
 
+}
+
+export function getSpaceById(id) {
+    const allSpaces = JSON.parse(localStorage.getItem("my_spaces") || "[]");
+    return allSpaces.find(space => space.id === id);
 }
