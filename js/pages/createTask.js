@@ -15,35 +15,107 @@ export function renderCreateTask(spaceId){
         
         <h2 class="page-title">Create Task</h2>
         
-        <div class="card">
+        <form class="create-task-form">
         
-            <input class="input" placeholder="Task title">
+            <input class="input" name="title" placeholder="title">
             
-            <select class="input">
-                <option>Alex</option>
-                <option>Sam</option>
-            </select>
+            <label>Assignee:</label>
+            <input class="input" name="username" placeholder="username">
             
-            <input class="input" type="date">
+            <label>Due Date:</label>
+            <input class="input" type="date" name="next_due_date" required>
+            
+            <label>
+                <input type="checkbox" name="is_recurring" id="recurring-check"> 
+                Is Recurring?
+            </label>
+            
+            <input class="input" type="number" name="frequency_days" id="freq-input" 
+                   placeholder="Frequency (days)" style="display:none">
+                   
+            <br>
             
             <button class="button primary" id="createTaskBtn">
                 Create Task
             </button>
         
-        </div>
+        </form>
     
     </div>
     
     `;
 
-    document
-        .getElementById("createTaskBtn")
-        .onclick=()=>{
+    const check = document.getElementById("recurring-check");
+    const freqInput = document.getElementById("freq-input");
 
-        // позже API
+    check.addEventListener("change", (e) => {
+        freqInput.style.display = e.target.checked ? "block" : "none";
+    });
 
-        location.hash="space/"+spaceId;
+    const form = document.querySelector(".create-task-form");
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
 
-    };
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
 
+        const assignee_id = await getIdByUsername(data.username)
+
+        const taskData = {
+            title: data.title,
+            is_recurring: !!data.is_recurring,
+            frequency_days: parseInt(data.frequency_days) || 0,
+            assignee_id: assignee_id,
+            next_due_date: data.next_due_date
+        };
+
+        try {
+            await createTask(spaceId, taskData);
+
+            location.hash = `space/${spaceId}`
+        } catch (error) {
+            alert("Ошибка при создании задачи");
+        }
+    })
+}
+
+export async function createTask(spaceId, taskData){
+    const token = localStorage.getItem("access_token");
+    try {
+        const response = await fetch(`https://colivin.ru/api/spaces/${spaceId}/tasks`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify(taskData)
+        });
+
+        if (!response.ok) throw new Error(await response.text());
+    } catch (error) {
+        console.error("Ошибка при создании задания:", error);
+        throw error;
+    }
+}
+
+export async function getIdByUsername(username){
+    const token = localStorage.getItem("access_token");
+    try {
+        const response = await fetch(`https://colivin.ru/api/users/by-login/${username}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) throw new Error(await response.text());
+
+        const userData = await response.json();
+        return userData.id;
+    } catch (error) {
+        console.error("Ошибка при получении id:", error);
+        throw error;
+    }
 }
