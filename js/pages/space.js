@@ -1,20 +1,46 @@
 import {Navbar} from "../components/navbar.js"
-import {taskCard} from "../components/taskCard.js"
 import {BackButton} from "../components/backButton.js"
 
-export function renderSpace(id){
-    const space = getSpaceById(id)
+export async function renderSpace(id){
+    let tasks = await getCurrentTasks(id);
 
-    const tasks=[
-        {title:"Take out trash",user:"Alex",due:"Today"},
-        {title:"Clean kitchen",user:"Sam",due:"Tomorrow"}
-    ];
+    const space = await getSpaceById(id)
 
-    let tasksHTML="";
+    const tasksWithUsernames = await Promise.all(tasks.map(async (task) => {
+        try {
+            const username = await getUsernameById(task.assignee_id);
+            return { ...task, assignee_name: username };
+        } catch (e) {
+            return { ...task, assignee_name: "Unknown" };
+        }
+    }));
 
-    tasks.forEach(t=>{
-        tasksHTML+=taskCard(t)
-    })
+    const tasksHTML = tasksWithUsernames.map(task => `
+        <div class="card">
+            
+                <h3>${task.title}</h3>
+                <p>ID: ${task.id}</p>
+                <p>Assignee: ${task.assignee_name}</p>
+                <p>Due: ${task.next_due_date}</p>
+                
+                <br>
+                
+                <button class="button success mark-done-btn" data-id="${task.id}">
+                    Mark Done
+                </button>
+            
+            </div>
+    `).join('');
+
+    const events = await getSpaceEvents(id);
+
+    const eventsHTML = events.map(event => `
+        <div class="history-item">
+            ${event.payload.task_title || ''} <br>
+            ${event.payload.user_name || ''} <br>
+            ${event.payload.action || ''}
+        </div>
+    `).join('');
 
     const app=document.getElementById("app");
 
@@ -38,7 +64,7 @@ export function renderSpace(id){
         
         <div class="grid">
         
-            ${tasksHTML}
+            ${tasksHTML || "<p>У вас пока нет задач.</p>"}
         
         </div>
         
@@ -48,13 +74,7 @@ export function renderSpace(id){
         
         <div class="card">
         
-            <div class="history-item">
-                Alex completed "Take out trash"
-            </div>
-            
-            <div class="history-item">
-                Sam created task "Clean kitchen"
-            </div>
+            ${eventsHTML || "<p>У пространства еще нет истории.</p>"}
         
         </div>
     
@@ -62,9 +82,110 @@ export function renderSpace(id){
     
     `;
 
+    const buttons = app.querySelectorAll('.mark-done-btn');
+    buttons.forEach(button => {
+        button.addEventListener('click', async (event) => {
+            const taskId = event.target.getAttribute('data-id');
+
+            try {
+                await markCompleted(taskId);
+                await renderSpace(id);
+            } catch (e) {
+                alert("Не удалось отметить задачу как выполненную");
+            }
+        })
+    })
 }
 
 export function getSpaceById(id) {
     const allSpaces = JSON.parse(localStorage.getItem("my_spaces") || "[]");
     return allSpaces.find(space => space.id === id);
+}
+
+export async function getCurrentTasks(id) {
+    const token = localStorage.getItem("access_token");
+
+    try {
+        const response = await fetch(`https://colivin.ru/api/spaces/${id}/tasks`, {
+            method: "GET",
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json'
+            }
+        });
+
+        if (!response.ok) throw new Error(await response.text());
+
+        const tasks = await response.json();
+        localStorage.setItem(`space_${id}_tasks`, JSON.stringify(tasks));
+
+        return tasks;
+    } catch (error) {
+        console.error("Ошибка загрузки задач:", error);
+    }
+}
+
+export async function getUsernameById(id) {
+    const token = localStorage.getItem("access_token");
+
+    try {
+        const response = await fetch(`https://colivin.ru/api/users/by-id/${id}`, {
+            method: "GET",
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json'
+            }
+        });
+
+        if (!response.ok) throw new Error(await response.text());
+
+        const userData = await response.json();
+        return  userData.login;
+    } catch (error) {
+        console.error("Ошибка при получении логина:", error);
+        throw error;
+    }
+}
+
+
+export async function markCompleted(taskId) {
+    const token = localStorage.getItem("access_token");
+    try {
+        const response = await fetch(`https://colivin.ru/api/tasks/${taskId}/complete`, {
+            method: "POST",
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json'
+            }
+        });
+
+        if (!response.ok) throw new Error(await response.text());
+    } catch (error) {
+        console.error("Ошибка при выполнении задачи:", error);
+        throw error;
+    }
+}
+
+export async function getSpaceEvents(spaceId) {
+    const token = localStorage.getItem("access_token");
+
+    try {
+        const response = await fetch(`https://colivin.ru/api/spaces/${spaceId}/events`, {
+            method: "GET",
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json'
+            }
+        });
+
+        if (!response.ok) throw new Error(await response.text());
+
+        const events = await response.json();
+        localStorage.setItem(`space_${spaceId}_events`, JSON.stringify(events));
+
+        return events;
+    } catch (error) {
+        console.error("Ошибка при получении событий:", error);
+        throw error;
+    }
 }
