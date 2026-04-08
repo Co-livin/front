@@ -1,5 +1,4 @@
 ﻿import {Navbar} from "../components/navbar.js"
-import {BackButton} from "../components/backButton.js"
 
 export function renderJoinSpace(){
 
@@ -11,7 +10,9 @@ export function renderJoinSpace(){
     
     <div class="container">
     
-        ${BackButton()}
+        <button class="button secondary" onclick="location.hash = 'dashboard'" style="margin-bottom:20px">
+            ← Back
+        </button>
         
         <h2 class="page-title">Join Space</h2>
         

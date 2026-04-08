@@ -1,5 +1,4 @@
 ﻿import {Navbar} from "../components/navbar.js"
-import {BackButton} from "../components/backButton.js"
 
 export function renderCreateTask(spaceId){
 
@@ -11,7 +10,9 @@ export function renderCreateTask(spaceId){
     
     <div class="container">
     
-        ${BackButton()}
+        <button class="button secondary" onclick="location.hash = 'space/${spaceId}'" style="margin-bottom:20px">
+            ← Back
+        </button>
         
         <h2 class="page-title">Create Task</h2>
         

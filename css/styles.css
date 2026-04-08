@@ -74,6 +74,11 @@ body{
     color:white;
 }
 
+.delete {
+    background: lightcoral;
+    color:white;
+}
+
 .input{
     width:100%;
     padding:10px;

@@ -4,9 +4,9 @@ import {renderDashboard} from "./pages/dashboard.js"
 import {renderCreateSpace} from "./pages/createSpace.js"
 import {renderSpace} from "./pages/space.js"
 import {renderCreateTask} from "./pages/createTask.js"
-import {renderAddUser} from "./pages/addUser.js"
 import {renderProfile} from "./pages/profile.js"
 import {renderJoinSpace} from "./pages/joinSpace.js";
+import {renderUpdateTask} from "./pages/updateTask.js";
 
 export function router(){
 
@@ -24,6 +24,13 @@ export function router(){
         return;
     }
 
+    if (hash.startsWith("#update-task/")){
+        const spaceId= parseInt(hash.split("/")[1], 10);
+        const taskId = parseInt(hash.split("/")[2], 10);
+        renderUpdateTask(spaceId, taskId);
+        return;
+    }
+
     switch(hash){
 
         case "#register":
@@ -36,10 +43,6 @@ export function router(){
 
         case "#create-space":
             renderCreateSpace();
-            break;
-
-        case "#add-user":
-            renderAddUser();
             break;
 
         case "#profile":

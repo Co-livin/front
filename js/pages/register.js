@@ -1,6 +1,4 @@
-﻿import {BackButton} from "../components/backButton.js"
-
-export function renderRegister(){
+﻿export function renderRegister(){
 
     const app=document.getElementById("app");
 
@@ -8,7 +6,9 @@ export function renderRegister(){
 
     <div class="container">
     
-        ${BackButton()}
+        <button class="button secondary" onclick="location.hash = 'login'" style="margin-bottom:20px">
+            ← Back
+        </button>
     
         <div class="card center-card">
         

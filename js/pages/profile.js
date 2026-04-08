@@ -1,5 +1,4 @@
 ﻿import {Navbar} from "../components/navbar.js"
-import {BackButton} from "../components/backButton.js"
 
 export function renderProfile(){
 
@@ -13,7 +12,9 @@ export function renderProfile(){
     
     <div class="container">
     
-        ${BackButton()}
+        <button class="button secondary" onclick="history.back()" style="margin-bottom:20px">
+            ← Back
+        </button>
     
         <h2 class="page-title">Profile</h2>
         

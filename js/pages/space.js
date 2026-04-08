@@ -1,5 +1,4 @@
 import {Navbar} from "../components/navbar.js"
-import {BackButton} from "../components/backButton.js"
 
 export async function renderSpace(id){
     let tasks = await getCurrentTasks(id);
@@ -18,18 +17,21 @@ export async function renderSpace(id){
     const tasksHTML = tasksWithUsernames.map(task => `
         <div class="card">
             
-                <h3>${task.title}</h3>
-                <p>ID: ${task.id}</p>
-                <p>Assignee: ${task.assignee_name}</p>
-                <p>Due: ${task.next_due_date}</p>
-                
-                <br>
-                
-                <button class="button success mark-done-btn" data-id="${task.id}">
-                    Mark Done
-                </button>
+            <h3>${task.title}</h3>
+            <p>ID: ${task.id}</p>
+            <p>Assignee: ${task.assignee_name}</p>
+            <p>Due: ${task.next_due_date}</p>
             
-            </div>
+            <br>
+            
+            <button class="button success mark-done-btn" data-id="${task.id}">
+                Mark Done
+            </button>
+            
+            <button class="button secondary update-btn" onclick="location.hash='update-task/${id}/${task.id}'">
+                Update Task
+            </button>
+        </div>
     `).join('');
 
     const events = await getSpaceEvents(id);
@@ -50,7 +52,9 @@ export async function renderSpace(id){
     
     <div class="container">
     
-        ${BackButton()}
+        <button class="button secondary" onclick="location.hash = 'dashboard'" style="margin-bottom:20px">
+            ← Back
+        </button>
     
         <h2 class="page-title">Space ${space.name}</h2>
         
@@ -82,8 +86,8 @@ export async function renderSpace(id){
     
     `;
 
-    const buttons = app.querySelectorAll('.mark-done-btn');
-    buttons.forEach(button => {
+    const doneButtons = app.querySelectorAll('.mark-done-btn');
+    doneButtons.forEach(button => {
         button.addEventListener('click', async (event) => {
             const taskId = event.target.getAttribute('data-id');
 
