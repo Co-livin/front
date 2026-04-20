@@ -37,48 +37,72 @@ export async function renderSpace(id){
 
     const ITEMS_PER_PAGE = 7;
 
-    function renderHistory(events, page, spaceId) {
+    function initHistoryPagination(events, spaceId) {
+        const ITEMS_PER_PAGE = 7;
+
         const historyContainer = document.getElementById("history-container");
         const paginationContainer = document.getElementById("pagination-container");
 
-        const start = (page - 1) * ITEMS_PER_PAGE;
-        const end = start + ITEMS_PER_PAGE;
+        let currentPage = 1;
 
-        const paginatedEvents = events.slice(start, end);
+        async function renderPage() {
+            const totalPages = Math.max(1, Math.ceil(events.length / ITEMS_PER_PAGE));
 
-        historyContainer.innerHTML = paginatedEvents.map(event => `
-        <div class="history-item">
-            ${event.payload.task_title || ''} <br>
-            ${event.payload.user_name || ''} <br>
-            ${event.payload.action || ''}
-        </div>
-    `).join('') || "<p>У пространства еще нет истории.</p>";
+            if (currentPage > totalPages) currentPage = totalPages;
+            if (currentPage < 1) currentPage = 1;
 
-        const totalPages = Math.ceil(events.length / ITEMS_PER_PAGE);
+            const start = (currentPage - 1) * ITEMS_PER_PAGE;
+            const paginated = events.slice(start, start + ITEMS_PER_PAGE);
 
-        paginationContainer.innerHTML = `
-    <div class="pagination">
-        <button class="page-btn" ${page === 1 ? "disabled" : ""} 
-            onclick="window.changePage(${page - 1})">
-            <span class="arrow left"></span>
-        </button>
+            // HISTORY (быстро через DOM nodes)
+            historyContainer.replaceChildren(
+                ...paginated.map(event => {
+                    const div = document.createElement("div");
+                    div.className = "history-item";
 
-        <span class="page-info">Page ${page} / ${totalPages}</span>
+                    div.innerHTML = `
+                    ${event.payload?.task_title || ''} <br>
+                    ${event.payload?.user_name || ''} <br>
+                    ${event.payload?.action || ''}
+                `;
 
-        <button class="page-btn" ${page === totalPages ? "disabled" : ""} 
-            onclick="window.changePage(${page + 1})">
-            <span class="arrow right"></span>
-        </button>
-    </div>
-`;
+                    return div;
+                })
+            );
 
-        document.getElementById("prev-page")?.addEventListener("click", () => {
-            renderHistory(events, page - 1, spaceId);
+            const totalPagesText = Math.max(1, totalPages);
+
+            paginationContainer.innerHTML = `
+            <div class="pagination">
+                <button class="page-btn prev" ${currentPage === 1 ? "disabled" : ""}>
+                    <span class="arrow left"></span>
+                </button>
+
+                <span class="page-info">Page ${currentPage} / ${totalPagesText}</span>
+
+                <button class="page-btn next" ${currentPage === totalPages ? "disabled" : ""}>
+                    <span class="arrow right"></span>
+                </button>
+            </div>
+        `;
+        }
+
+        paginationContainer.addEventListener("click", (e) => {
+            const btn = e.target.closest("button");
+            if (!btn || btn.disabled) return;
+
+            if (btn.classList.contains("prev")) {
+                currentPage--;
+                renderPage();
+            }
+
+            if (btn.classList.contains("next")) {
+                currentPage++;
+                renderPage();
+            }
         });
 
-        document.getElementById("next-page")?.addEventListener("click", () => {
-            renderHistory(events, page + 1, spaceId);
-        });
+        renderPage();
     }
 
     const app=document.getElementById("app");
@@ -121,7 +145,7 @@ export async function renderSpace(id){
     
     `;
 
-    renderHistory(events, 1, id);
+    await initHistoryPagination(events, id);
 
     const doneButtons = app.querySelectorAll('.mark-done-btn');
     doneButtons.forEach(button => {
