@@ -10,26 +10,23 @@ export async function renderCreateTask(spaceId){
     ${Navbar()}
     
     <div class="container">
-    
         <button class="button secondary" onclick="location.hash = 'space/${spaceId}'" style="margin-bottom:20px">
             ← Back
         </button>
-        
+     
         <h2 class="page-title">Create Task</h2>
-        
         <form class="create-task-form">
-        
             <input class="input" name="title" placeholder="title" minlength="4" maxlength="25">
             
             <br>
             <br>
             
-            <label>
+            <label class="due-date">
                 Due Date:
                 <input class="input" type="date" name="next_due_date" required min="2026-01-01">
             </label>
             
-            <label>
+            <label class="checkbox-label">
                 <input type="checkbox" name="is_recurring" id="recurring-check"> 
                 Is Recurring?
             </label>
@@ -54,8 +51,17 @@ export async function renderCreateTask(spaceId){
 
     const select = document.createElement("select");
     select.name = "username";
+    select.required = true;
 
     label.appendChild(select);
+
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = "select name";
+    placeholder.disabled = true;
+    placeholder.selected = true;
+
+    select.appendChild(placeholder);
 
     const members = await getSpaceMembers(spaceId);
     members.forEach(member => {

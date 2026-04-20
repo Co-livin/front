@@ -32,7 +32,7 @@ export async function renderUpdateTask(spaceId, taskId) {
                 <input class="input" type="date" name="next_due_date" required min="2026-01-01">
             </label>
             
-            <label>
+            <label class="checkbox-label">
                 <input type="checkbox" name="is_recurring" id="recurring-check"> 
                 Is Recurring?
             </label>
@@ -55,8 +55,17 @@ export async function renderUpdateTask(spaceId, taskId) {
 
     const select = document.createElement("select");
     select.name = "username";
+    select.required = true;
 
     label.appendChild(select);
+
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = "select name";
+    placeholder.disabled = true;
+    placeholder.selected = true;
+
+    select.appendChild(placeholder);
 
     const members = await getSpaceMembers(spaceId);
     members.forEach(member => {

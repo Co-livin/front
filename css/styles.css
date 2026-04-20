@@ -33,6 +33,7 @@ body{
     max-width:1100px;
     margin:auto;
     padding:40px 20px;
+    font-size:20px;
 }
 
 .grid{
@@ -57,7 +58,7 @@ body{
     border-radius:8px;
     padding:10px 16px;
     cursor:pointer;
-    font-weight:500;
+    font-size:18px;
 }
 
 .primary{
@@ -107,3 +108,78 @@ body{
     margin-bottom:20px;
     font-size:16px;
 }
+
+input[type="checkbox"] {
+    accent-color: #FF8A65;
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    user-select: none;
+}
+
+input::placeholder {
+    color: #888;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-color: #FF8A65;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+input[type="date"] {
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #888;
+}
+
+input[type="date"]:valid {
+    color: #333;
+}
+
+input,
+select {
+    transition: 0.2s;
+    border: 1px solid #e0d6d2;
+    border-radius: 5px;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #FF8A65;
+    box-shadow: 0 0 0 3px rgba(255, 138, 101, 0.2);
+}
+
+select {
+    width: 200px;
+    height: 40px;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+select:invalid {
+    color: #888;
+}
+
+select:valid {
+    color: #333;
+}
+
+.input[name="title"],
+.input[type="number"]{
+    height: 45px;
+    padding: 5px;
+    font-size: 18px;
+}
+
