@@ -9,44 +9,40 @@ export async function renderCreateTask(spaceId){
 
     ${Navbar()}
     
-    <div class="container">
-        <button class="button back" onclick="location.hash = 'space/${spaceId}'" style="margin-bottom:20px">
-            ← Back
+    <div class="container create-task">
+        <button class="button back" onclick="location.hash = 'space/${spaceId}'" style="margin-bottom: 30px">
+            Отмена
         </button>
-        <h2 class="page-title">Create Task</h2>
+        <h2 class="page-title">Создать задачу</h2>
         <form class="create-task-form">
-            <input class="input" name="title" placeholder="title" minlength="4" maxlength="25">
-            
-            <br>
-            <br>
-            
+ 
+            <input class="input" name="title" placeholder="Название" minlength="2" maxlength="20" required>
+     
+            <label id="assignee-label">
+                <b>Ответственный:</b>
+            </label>
             <label class="due-date">
-                Due Date:
+                <b>Дедлайн:</b>
                 <input class="input" type="date" name="next_due_date" required min="2026-01-01">
             </label>
             
             <label class="checkbox-label">
                 <input type="checkbox" name="is_recurring" id="recurring-check"> 
-                Is Recurring?
+                <b>Является регулярной?</b>
             </label>
             
             <input class="input" type="number" name="frequency_days" id="freq-input" 
-                   placeholder="Frequency (days)" style="display:none" min="1" max="365">
+                   placeholder="Период (в днях)" style="display:none" min="1" max="365">
                    
-            <br>
-            
             <button class="button primary" id="createTaskBtn">
-                Create Task
+                Создать
             </button>
-        
         </form>
-    
     </div>
     
     `;
 
-    const label = document.createElement("label");
-    label.textContent = "Assignee:";
+    const label = document.getElementById("assignee-label");
 
     const select = document.createElement("select");
     select.name = "username";
@@ -56,7 +52,7 @@ export async function renderCreateTask(spaceId){
 
     const placeholder = document.createElement("option");
     placeholder.value = "";
-    placeholder.textContent = "select name";
+    placeholder.textContent = "Выбери имя";
     placeholder.disabled = true;
     placeholder.selected = true;
 
