@@ -5,17 +5,12 @@ export async function renderDashboard(){
     let spaces = await getCurrentSpaces();
 
     const spacesHtml = spaces.map(space => `
-        <div class="card">
-            
+        <div class="card main">
                 <h3>${space.name}</h3>
-                <p>Code: ${space.invite_code}</p>
-                
-                <br>
-                
-                <button class="button primary" onclick="location.hash='space/${space.id}'">
-                    Open
+                <p>Инвайт-код: ${space.invite_code}</p>
+                <button class="button open" onclick="location.hash='space/${space.id}'">
+                    Открыть
                 </button>
-            
             </div>
     `).join('');
 

@@ -51,6 +51,18 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.open {
+    width: fit-content;
+    background: #FF8A65;
+    color: white;
+}
+
 .card h3 {
     margin-bottom: 10px;
 }
