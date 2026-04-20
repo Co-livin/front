@@ -8,7 +8,6 @@ export async function renderDashboard(){
         <div class="card">
             
                 <h3>${space.name}</h3>
-                <p>ID: ${space.id}</p>
                 <p>Code: ${space.invite_code}</p>
                 
                 <br>

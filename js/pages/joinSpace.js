@@ -18,7 +18,7 @@ export function renderJoinSpace(){
         
         <form class="join-space-form">
         
-            <input class="input" name="invite_code" placeholder="Join code">
+            <input class="input" name="invite_code" placeholder="Join code" maxlength="10">
             
             <button class="button primary" type="submit" id="joinSpaceBtn">
                 Join Space

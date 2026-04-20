@@ -1,7 +1,7 @@
 ﻿import {Navbar} from "../components/navbar.js";
-import {getIdByUsername} from "./createTask.js";
+import {getIdByUsername, getSpaceMembers} from "./createTask.js";
 
-export function renderUpdateTask(spaceId, taskId) {
+export async function renderUpdateTask(spaceId, taskId) {
     const app=document.getElementById("app");
 
     app.innerHTML=`
@@ -22,13 +22,12 @@ export function renderUpdateTask(spaceId, taskId) {
         
         <form class="update-task-form">
         
-            <input class="input" name="title" placeholder="title">
+            <input class="input" name="title" placeholder="title" minlength="4" maxlength="25">
             
-            <label>Assignee:</label>
-            <input class="input" name="username" placeholder="username">
-            
-            <label>Due Date:</label>
-            <input class="input" type="date" name="next_due_date">
+            <label>
+                Due Date:
+                <input class="input" type="date" name="next_due_date" required min="2026-01-01">
+            </label>
             
             <label>
                 <input type="checkbox" name="is_recurring" id="recurring-check"> 
@@ -36,7 +35,7 @@ export function renderUpdateTask(spaceId, taskId) {
             </label>
             
             <input class="input" type="number" name="frequency_days" id="freq-input" 
-                   placeholder="Frequency (days)" style="display:none">
+                   placeholder="Frequency (days)" style="display:none" min="1" max="365">
                    
             <br>
             
@@ -47,6 +46,19 @@ export function renderUpdateTask(spaceId, taskId) {
     </div>
     
     `;
+
+    const select = document.createElement("select");
+    select.name = "username";
+    const members = await getSpaceMembers(spaceId);
+    members.forEach(member => {
+        const option = document.createElement("option");
+        option.value = member;
+        option.text = member;
+        select.appendChild(option);
+    });
+
+    const titleInput = document.querySelector('input[name="title"]');
+    titleInput.after(select);
 
     const check = document.getElementById("recurring-check");
     const freqInput = document.getElementById("freq-input");

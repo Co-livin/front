@@ -1,3 +1,5 @@
+import {getCurrentSpaces} from "./dashboard.js";
+
 export function renderLogin(){
 
     const app=document.getElementById("app");
@@ -12,9 +14,9 @@ export function renderLogin(){
             
             <form class="login-form">
             
-                <input class="input" name="username" placeholder="login">
+                <input class="input" name="username" placeholder="login" minlength="4" maxlength="16">
                 
-                <input class="input" type="password" name="password" placeholder="password">
+                <input class="input" type="password" name="password" placeholder="password" minlength="8" maxlength="16">
                 
                 <button class="button primary" type="submit" id="button-login">
                     Login
@@ -44,7 +46,12 @@ export function renderLogin(){
         try {
             await loginUser(data);
             await getCurrentUserData();
-            location.hash = "dashboard";
+            const spaces = await getCurrentSpaces();
+            if (spaces.length === 1) {
+                location.hash = `space/${spaces[0].id}`
+            } else {
+                location.hash = "dashboard";
+            }
         } catch(err) {
             alert("Ошибка входа");
         }

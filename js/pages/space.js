@@ -18,7 +18,6 @@ export async function renderSpace(id){
         <div class="card">
             
             <h3>${task.title}</h3>
-            <p>ID: ${task.id}</p>
             <p>Assignee: ${task.assignee_name}</p>
             <p>Due: ${task.next_due_date}</p>
             
@@ -36,13 +35,43 @@ export async function renderSpace(id){
 
     const events = await getSpaceEvents(id);
 
-    const eventsHTML = events.map(event => `
+    const ITEMS_PER_PAGE = 7;
+
+    function renderHistory(events, page, spaceId) {
+        const historyContainer = document.getElementById("history-container");
+        const paginationContainer = document.getElementById("pagination-container");
+
+        const start = (page - 1) * ITEMS_PER_PAGE;
+        const end = start + ITEMS_PER_PAGE;
+
+        const paginatedEvents = events.slice(start, end);
+
+        historyContainer.innerHTML = paginatedEvents.map(event => `
         <div class="history-item">
             ${event.payload.task_title || ''} <br>
             ${event.payload.user_name || ''} <br>
             ${event.payload.action || ''}
         </div>
-    `).join('');
+    `).join('') || "<p>У пространства еще нет истории.</p>";
+
+        const totalPages = Math.ceil(events.length / ITEMS_PER_PAGE);
+
+        paginationContainer.innerHTML = `
+        <div class="pagination">
+            <button ${page === 1 ? "disabled" : ""} id="prev-page">←</button>
+            <span>Page ${page} / ${totalPages}</span>
+            <button ${page === totalPages ? "disabled" : ""} id="next-page">→</button>
+        </div>
+    `;
+
+        document.getElementById("prev-page")?.addEventListener("click", () => {
+            renderHistory(events, page - 1, spaceId);
+        });
+
+        document.getElementById("next-page")?.addEventListener("click", () => {
+            renderHistory(events, page + 1, spaceId);
+        });
+    }
 
     const app=document.getElementById("app");
 
@@ -76,15 +105,15 @@ export async function renderSpace(id){
         
         <h3>History</h3>
         
-        <div class="card">
-        
-            ${eventsHTML || "<p>У пространства еще нет истории.</p>"}
-        
-        </div>
+        <div class="card" id="history-container"></div>
+
+        <div id="pagination-container"></div>
     
     </div>
     
     `;
+
+    renderHistory(events, 1, id);
 
     const doneButtons = app.querySelectorAll('.mark-done-btn');
     doneButtons.forEach(button => {

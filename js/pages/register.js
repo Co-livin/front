@@ -15,9 +15,9 @@
             <h2 class="page-title">Register</h2>
             
             <form class="register-form">
-                <input class="input" name="login" placeholder="login">
-                <input class="input" name="name" placeholder="name">
-                <input class="input" name="password" type="password" placeholder="password">
+                <input class="input" name="login" placeholder="login" minlength="4" maxlength="16">
+                <input class="input" name="name" placeholder="name" minlength="2" maxlength="16">
+                <input class="input" name="password" type="password" placeholder="password" minlength="8" maxlength="16">
             
                 <button class="button primary" type="submit" id="button-register">
                     Register

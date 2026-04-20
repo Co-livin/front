@@ -1,6 +1,7 @@
 ﻿import {Navbar} from "../components/navbar.js"
+import {getUsernameById} from "./space.js";
 
-export function renderCreateTask(spaceId){
+export async function renderCreateTask(spaceId){
 
     const app=document.getElementById("app");
 
@@ -18,13 +19,15 @@ export function renderCreateTask(spaceId){
         
         <form class="create-task-form">
         
-            <input class="input" name="title" placeholder="title">
+            <input class="input" name="title" placeholder="title" minlength="4" maxlength="25">
             
-            <label>Assignee:</label>
-            <input class="input" name="username" placeholder="username">
+            <br>
+            <br>
             
-            <label>Due Date:</label>
-            <input class="input" type="date" name="next_due_date" required>
+            <label>
+                Due Date:
+                <input class="input" type="date" name="next_due_date" required min="2026-01-01">
+            </label>
             
             <label>
                 <input type="checkbox" name="is_recurring" id="recurring-check"> 
@@ -32,7 +35,7 @@ export function renderCreateTask(spaceId){
             </label>
             
             <input class="input" type="number" name="frequency_days" id="freq-input" 
-                   placeholder="Frequency (days)" style="display:none">
+                   placeholder="Frequency (days)" style="display:none" min="1" max="365">
                    
             <br>
             
@@ -45,6 +48,25 @@ export function renderCreateTask(spaceId){
     </div>
     
     `;
+
+    const label = document.createElement("label");
+    label.textContent = "Assignee:";
+
+    const select = document.createElement("select");
+    select.name = "username";
+
+    label.appendChild(select);
+
+    const members = await getSpaceMembers(spaceId);
+    members.forEach(member => {
+        const option = document.createElement("option");
+        option.value = member;
+        option.text = member;
+        select.appendChild(option);
+    });
+
+    const titleInput = document.querySelector('input[name="title"]');
+    titleInput.after(label);
 
     const check = document.getElementById("recurring-check");
     const freqInput = document.getElementById("freq-input");
@@ -117,6 +139,33 @@ export async function getIdByUsername(username){
         return userData.id;
     } catch (error) {
         console.error("Ошибка при получении id:", error);
+        throw error;
+    }
+}
+
+export async function getSpaceMembers(spaceId){
+    const token = localStorage.getItem("access_token");
+    try {
+        const response = await fetch(`https://colivin.ru/api/spaces/${spaceId}/members`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) throw new Error(await response.text());
+
+        const membersData = await response.json();
+        const ids = membersData.map(member => member.user_id);
+        const members = [];
+        for (const id of ids){
+            const login = await getUsernameById(id);
+            members.push(login);
+        }
+        return members;
+    } catch (error) {
+        console.error("Ошибка при получении участников:", error);
         throw error;
     }
 }

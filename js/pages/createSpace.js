@@ -18,7 +18,7 @@ export function renderCreateSpace(){
         
         <form class="add-space-form">
         
-            <input class="input" name="name" placeholder="Space name">
+            <input class="input" name="name" placeholder="Space name" minlength="2" maxlength="16">
             
             <button class="button primary" type="submit" id="createSpaceBtn">
                 Create Space
