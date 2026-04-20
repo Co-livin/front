@@ -10,7 +10,7 @@ export async function renderUpdateTask(spaceId, taskId) {
     
     <div class="container">
     
-        <button class="button secondary" onclick="location.hash = 'space/${spaceId}'" style="margin-bottom:20px">
+        <button class="button back" onclick="location.hash = 'space/${spaceId}'" style="margin-bottom:20px">
             ← Back
         </button>
         

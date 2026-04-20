@@ -3,31 +3,24 @@
 export function renderJoinSpace(){
 
     const app=document.getElementById("app");
-
     app.innerHTML=`
-
     ${Navbar()}
     
-    <div class="container">
-    
-        <button class="button secondary" onclick="location.hash = 'dashboard'" style="margin-bottom:20px">
-            ← Back
+    <div class="container join-space">
+        <button class="button back-button" onclick="location.hash = 'dashboard'">
+            Отмена
         </button>
-        
-        <h2 class="page-title">Join Space</h2>
-        
-        <form class="join-space-form">
-        
-            <input class="input" name="invite_code" placeholder="Join code" maxlength="10">
-            
-            <button class="button primary" type="submit" id="joinSpaceBtn">
-                Join Space
-            </button>
-        
-        </form>
-    
+        <div class="content-card">
+            <h2 class="page-title invite-space">Введите код для входа в пространство</h2>
+            <form class="join-space-form">
+                <input class="input" name="invite_code" placeholder="Инвайт-код" maxlength="10">
+               
+                <button class="button primary" type="submit" id="joinSpaceBtn">
+                    Присоединиться
+                </button>
+            </form>
+        </div>
     </div>
-    
     `;
 
     const form = document.querySelector(".join-space-form");

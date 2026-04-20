@@ -10,10 +10,9 @@ export async function renderCreateTask(spaceId){
     ${Navbar()}
     
     <div class="container">
-        <button class="button secondary" onclick="location.hash = 'space/${spaceId}'" style="margin-bottom:20px">
+        <button class="button back" onclick="location.hash = 'space/${spaceId}'" style="margin-bottom:20px">
             ← Back
         </button>
-     
         <h2 class="page-title">Create Task</h2>
         <form class="create-task-form">
             <input class="input" name="title" placeholder="title" minlength="4" maxlength="25">

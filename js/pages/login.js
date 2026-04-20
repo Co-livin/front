@@ -26,7 +26,7 @@ export function renderLogin(){
                 
             <br><br>
             
-            <button class="button secondary" onclick="location.hash='register'">
+            <button class="button back" onclick="location.hash='register'">
                 Create account
             </button>
         

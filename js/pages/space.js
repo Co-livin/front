@@ -113,13 +113,13 @@ export async function renderSpace(id){
     
     <div class="container">
     
-        <button class="button secondary" onclick="location.hash = 'dashboard'" style="margin-bottom:20px">
+        <button class="button back" onclick="location.hash = 'dashboard'" style="margin-bottom:20px">
             ← Back
         </button>
     
         <h2 class="page-title">Space ${space.name}</h2>
         
-        <button class="button secondary" onclick="location.hash='create-task/${id}'">
+        <button class="button back" onclick="location.hash='create-task/${id}'">
             Add Task
         </button>
         

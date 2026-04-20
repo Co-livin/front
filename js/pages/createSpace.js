@@ -3,35 +3,29 @@
 export function renderCreateSpace(){
 
     const app=document.getElementById("app");
-
     app.innerHTML=`
-
     ${Navbar()}
     
-    <div class="container">
-    
-        <button class="button secondary" onclick="location.hash = 'dashboard'" style="margin-bottom:20px">
-            ← Back
+    <div class="container create-space">
+        <button class="button back-button" onclick="location.hash = 'dashboard'">
+            Отмена
         </button>
-        
-        <h2 class="page-title">Create Space</h2>
-        
-        <form class="add-space-form">
-        
-            <input class="input" name="name" placeholder="Space name" minlength="2" maxlength="16">
-            
-            <button class="button primary" type="submit" id="createSpaceBtn">
-                Create Space
-            </button>
-        
-        </form>
+        <div class="content-card">
+            <h2 class="page-title spacename">Назовите своё пространство</h2>
+            <form class="add-space-form">
+                <label>
+                    <input class="input" name="name" placeholder="Название" minlength="2" maxlength="20" required>
+                </label>
     
+                <button class="button primary" type="submit" id="createSpaceBtn">
+                    Продолжить
+                </button>
+            </form>
+        </div>
     </div>
-    
     `;
 
     const form = document.querySelector(".add-space-form");
-
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
@@ -40,7 +34,6 @@ export function renderCreateSpace(){
 
         try {
             await createSpace(data);
-
             location.hash = "dashboard";
         } catch (error) {
             alert("Ошибка при создании пространства");
@@ -61,7 +54,10 @@ export async function createSpace(spaceData){
             body: JSON.stringify(spaceData)
         });
 
-        if (!response.ok) throw new Error(await response.text());
+        if (!response.ok) {
+            throw new Error(await response.text());
+        }
+
     } catch (error) {
         console.error("Ошибка при создании пространства:", error);
         throw error;

@@ -6,7 +6,7 @@
 
     <div class="container">
     
-        <button class="button secondary" onclick="location.hash = 'login'" style="margin-bottom:20px">
+        <button class="button back" onclick="location.hash = 'login'" style="margin-bottom:20px">
             ← Back
         </button>
     

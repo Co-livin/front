@@ -12,7 +12,7 @@ export function renderProfile(){
     
     <div class="container">
     
-        <button class="button secondary" onclick="history.back()" style="margin-bottom:20px">
+        <button class="button back" onclick="history.back()" style="margin-bottom:20px">
             ← Back
         </button>
     
@@ -25,7 +25,7 @@ export function renderProfile(){
             
             <br>
             
-            <button class="button secondary" onclick="location.hash='login'">
+            <button class="button back" onclick="location.hash='login'">
                 Logout
             </button>
         
