@@ -24,6 +24,9 @@ export async function renderUpdateTask(spaceId, taskId) {
         
             <input class="input" name="title" placeholder="title" minlength="4" maxlength="25">
             
+            <br>
+            <br>
+            
             <label>
                 Due Date:
                 <input class="input" type="date" name="next_due_date" required min="2026-01-01">
@@ -47,8 +50,14 @@ export async function renderUpdateTask(spaceId, taskId) {
     
     `;
 
+    const label = document.createElement("label");
+    label.textContent = "Assignee:";
+
     const select = document.createElement("select");
     select.name = "username";
+
+    label.appendChild(select);
+
     const members = await getSpaceMembers(spaceId);
     members.forEach(member => {
         const option = document.createElement("option");
@@ -58,7 +67,7 @@ export async function renderUpdateTask(spaceId, taskId) {
     });
 
     const titleInput = document.querySelector('input[name="title"]');
-    titleInput.after(select);
+    titleInput.after(label);
 
     const check = document.getElementById("recurring-check");
     const freqInput = document.getElementById("freq-input");
