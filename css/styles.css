@@ -179,7 +179,67 @@ select:valid {
 .input[name="title"],
 .input[type="number"]{
     height: 45px;
-    padding: 5px;
+    padding: 10px;
     font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.page-info {
+    font-size: 14px;
+    color: #666;
+}
+
+/* кнопки */
+.page-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #e0d6d2;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+
+.page-btn:hover:not(:disabled) {
+    border-color: #FF8A65;
+    box-shadow: 0 0 0 3px rgba(255, 138, 101, 0.15);
+    transform: translateY(-2px);
+}
+
+
+.page-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+
+.arrow {
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid #333;
+    border-right: 2px solid #333;
+    display: inline-block;
+}
+
+
+.arrow.left {
+    transform: rotate(-135deg);
+}
+
+.arrow.right {
+    transform: rotate(45deg);
 }
 

@@ -57,12 +57,18 @@ export async function renderSpace(id){
         const totalPages = Math.ceil(events.length / ITEMS_PER_PAGE);
 
         paginationContainer.innerHTML = `
-        <div class="pagination">
-            <button ${page === 1 ? "disabled" : ""} id="prev-page">←</button>
-            <span>Page ${page} / ${totalPages}</span>
-            <button ${page === totalPages ? "disabled" : ""} id="next-page">→</button>
-        </div>
-    `;
+    <div class="pagination">
+        <button class="page-btn" ${page === 1 ? "disabled" : ""} id="prev-page">
+            <span class="arrow left"></span>
+        </button>
+
+        <span class="page-info">Page ${page} / ${totalPages}</span>
+
+        <button class="page-btn" ${page === totalPages ? "disabled" : ""} id="next-page">
+            <span class="arrow right"></span>
+        </button>
+    </div>
+`;
 
         document.getElementById("prev-page")?.addEventListener("click", () => {
             renderHistory(events, page - 1, spaceId);
