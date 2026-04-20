@@ -58,13 +58,15 @@ export async function renderSpace(id){
 
         paginationContainer.innerHTML = `
     <div class="pagination">
-        <button class="page-btn" ${page === 1 ? "disabled" : ""} id="prev-page">
+        <button class="page-btn" ${page === 1 ? "disabled" : ""} 
+            onclick="window.changePage(${page - 1})">
             <span class="arrow left"></span>
         </button>
 
         <span class="page-info">Page ${page} / ${totalPages}</span>
 
-        <button class="page-btn" ${page === totalPages ? "disabled" : ""} id="next-page">
+        <button class="page-btn" ${page === totalPages ? "disabled" : ""} 
+            onclick="window.changePage(${page + 1})">
             <span class="arrow right"></span>
         </button>
     </div>
