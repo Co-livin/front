@@ -318,3 +318,8 @@ select:valid {
 .arrow.right {
     transform: rotate(45deg);
 }
+
+.button[id="exitAccount"] {
+    background: lightcoral;
+    color: white;
+}

@@ -7,20 +7,20 @@
     <div class="container">
     
         <button class="button back" onclick="location.hash = 'login'" style="margin-bottom:20px">
-            ← Back
+            Отмена
         </button>
     
         <div class="card center-card">
         
-            <h2 class="page-title">Register</h2>
+            <h2 class="page-title">Регистрация</h2>
             
             <form class="register-form">
-                <input class="input" name="login" placeholder="login" minlength="4" maxlength="16">
-                <input class="input" name="name" placeholder="name" minlength="2" maxlength="16">
-                <input class="input" name="password" type="password" placeholder="password" minlength="8" maxlength="16">
+                <input class="input" name="login" placeholder="Логин" minlength="4" maxlength="16">
+                <input class="input" name="name" placeholder="Имя" minlength="2" maxlength="16">
+                <input class="input" name="password" type="password" placeholder="Пароль" minlength="8" maxlength="16">
             
                 <button class="button primary" type="submit" id="button-register">
-                    Register
+                    Зарегистироваться
                 </button>
             </form>
         </div>

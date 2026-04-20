@@ -18,17 +18,17 @@ export async function renderSpace(id){
         <div class="card">
             
             <h3>${task.title}</h3>
-            <p>Assignee: ${task.assignee_name}</p>
-            <p>Due: ${task.next_due_date}</p>
+            <p>Ответственный: ${task.assignee_name}</p>
+            <p>Дедлайн: ${task.next_due_date}</p>
             
             <br>
             
             <button class="button success mark-done-btn" data-id="${task.id}">
-                Mark Done
+                Выполнено
             </button>
             
             <button class="button secondary update-btn" onclick="location.hash='update-task/${id}/${task.id}'">
-                Update Task
+                Изменить
             </button>
         </div>
     `).join('');
@@ -54,7 +54,6 @@ export async function renderSpace(id){
             const start = (currentPage - 1) * ITEMS_PER_PAGE;
             const paginated = events.slice(start, start + ITEMS_PER_PAGE);
 
-            // HISTORY (быстро через DOM nodes)
             historyContainer.replaceChildren(
                 ...paginated.map(event => {
                     const div = document.createElement("div");
@@ -114,18 +113,18 @@ export async function renderSpace(id){
     <div class="container">
     
         <button class="button back" onclick="location.hash = 'dashboard'" style="margin-bottom:20px">
-            ← Back
+            Отмена
         </button>
     
-        <h2 class="page-title">Space ${space.name}</h2>
+        <h2 class="page-title">Пространство ${space.name}</h2>
         
         <button class="button back" onclick="location.hash='create-task/${id}'">
-            Add Task
+            Создать задачу
         </button>
         
         <br><br>
         
-        <h3>Active Tasks</h3>
+        <h3>Активные задачи</h3>
         
         <div class="grid">
         

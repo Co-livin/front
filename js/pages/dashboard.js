@@ -22,14 +22,14 @@ export async function renderDashboard(){
     
     <div class="container">
     
-        <h2 class="page-title">Your Spaces</h2>
+        <h2 class="page-title">Твои пространства</h2>
         
         <button class="button secondary" onclick="location.hash='create-space'">
-            Create Space
+            Создать
         </button>
         
         <button class="button secondary" onclick="location.hash='join-space'">
-            Join Space
+            Присоединиться к другу
         </button>
         
         <br><br>

@@ -13,20 +13,20 @@ export function renderProfile(){
     <div class="container">
     
         <button class="button back" onclick="history.back()" style="margin-bottom:20px">
-            ← Back
+            Отмена
         </button>
     
-        <h2 class="page-title">Profile</h2>
+        <h2 class="page-title">Профиль</h2>
         
         <div class="card">
         
-            <p>Login: ${login}</p>
-            <p>Name: ${name}</p>
+            <p>Логин: ${login}</p>
+            <p>Имя: ${name}</p>
             
             <br>
             
-            <button class="button back" onclick="location.hash='login'">
-                Logout
+            <button class="button back" id="exitAccount" onclick="location.hash='login'">
+                Выйти из аккаунта
             </button>
         
         </div>

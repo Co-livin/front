@@ -14,12 +14,12 @@ export function renderLogin(){
             
             <form class="login-form">
             
-                <input class="input" name="username" placeholder="login" minlength="4" maxlength="16">
+                <input class="input" name="username" placeholder="Логин" minlength="4" maxlength="16">
                 
-                <input class="input" type="password" name="password" placeholder="password" minlength="8" maxlength="16">
+                <input class="input" type="password" name="password" placeholder="Пароль" minlength="8" maxlength="16">
                 
                 <button class="button primary" type="submit" id="button-login">
-                    Login
+                    Войти
                 </button>
                 
             </form>
@@ -27,7 +27,7 @@ export function renderLogin(){
             <br><br>
             
             <button class="button back" onclick="location.hash='register'">
-                Create account
+                Создать аккаунт
             </button>
         
         </div>
