@@ -1,4 +1,4 @@
-import {Navbar} from "../components/navbar.js"
+import {Navbar, initNavbar} from "../components/navbar.js"
 
 export async function renderSpace(id){
     let tasks = await getUpcomingTasks(id);
@@ -170,6 +170,8 @@ export async function renderSpace(id){
 
         </div>
     `;
+
+    initNavbar();
 
     initHistoryPagination(events);
 

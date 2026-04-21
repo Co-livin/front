@@ -1,4 +1,4 @@
-﻿import {Navbar} from "../components/navbar.js"
+﻿import {Navbar, initNavbar} from "../components/navbar.js"
 import {getUsernameById} from "./space.js";
 
 export async function renderCreateTask(spaceId){
@@ -41,6 +41,8 @@ export async function renderCreateTask(spaceId){
     </div>
     
     `;
+
+    initNavbar();
 
     const label = document.getElementById("assignee-label");
 

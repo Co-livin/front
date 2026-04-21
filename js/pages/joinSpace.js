@@ -1,4 +1,4 @@
-﻿import {Navbar} from "../components/navbar.js"
+﻿import {Navbar, initNavbar} from "../components/navbar.js"
 
 export function renderJoinSpace(){
 
@@ -22,6 +22,8 @@ export function renderJoinSpace(){
         </div>
     </div>
     `;
+
+    initNavbar();
 
     const form = document.querySelector(".join-space-form");
 

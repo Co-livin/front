@@ -1,4 +1,4 @@
-import {Navbar} from "../components/navbar.js"
+import {Navbar, initNavbar} from "../components/navbar.js"
 
 export async function renderDashboard(){
 
@@ -44,6 +44,7 @@ export async function renderDashboard(){
     
     `;
 
+    initNavbar();
 }
 
 export async function getCurrentSpaces() {

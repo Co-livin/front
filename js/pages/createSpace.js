@@ -1,4 +1,4 @@
-﻿import {Navbar} from "../components/navbar.js"
+﻿import {Navbar, initNavbar} from "../components/navbar.js"
 
 export function renderCreateSpace(){
 
@@ -24,6 +24,8 @@ export function renderCreateSpace(){
         </div>
     </div>
     `;
+
+    initNavbar();
 
     const form = document.querySelector(".add-space-form");
     form.addEventListener("submit", async (event) => {
