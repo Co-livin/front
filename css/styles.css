@@ -339,3 +339,7 @@ select:valid {
 .your-spaces h3 {
     margin-bottom: 5px;
 }
+
+.update-overdue {
+    background: #febbbb;
+}

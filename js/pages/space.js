@@ -54,7 +54,7 @@ export async function renderSpace(id){
                 Выполнить
             </button>
             
-            <button class="button secondary update-btn" onclick="location.hash='update-task/${id}/${task.id}'">
+            <button class="button secondary update-btn update-overdue" onclick="location.hash='update-task/${id}/${task.id}'">
                 Изменить
             </button>
         </div>
