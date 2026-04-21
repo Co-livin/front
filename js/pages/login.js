@@ -23,8 +23,8 @@ export function renderLogin(){
                 </button>
                 
             </form>
-                
-            <br><br>
+            
+            <br>
             
             <button class="button back" onclick="location.hash='register'">
                 Создать аккаунт

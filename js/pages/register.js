@@ -49,7 +49,6 @@
 }
 
 export async function registerUser(userData){
-    console.log(JSON.stringify(userData))
     try {
         const response = await fetch("https://colivin.ru/api/auth/register", {
             method: "POST",
