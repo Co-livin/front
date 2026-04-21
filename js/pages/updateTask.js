@@ -3,6 +3,7 @@ import {getIdByUsername, getSpaceMembers} from "./createTask.js";
 
 export async function renderUpdateTask(spaceId, taskId) {
     const app=document.getElementById("app");
+    const task = JSON.parse(localStorage.getItem("current-task"));
 
     app.innerHTML=`
 
@@ -22,7 +23,8 @@ export async function renderUpdateTask(spaceId, taskId) {
         
         <form class="update-task-form">
         
-            <input class="input" name="title" placeholder="Название" minlength="2" maxlength="20" required>
+            <input class="input" name="title" placeholder="Название" minlength="2" maxlength="20" required
+                value="${task.title}">
             
             <label id="assignee-label">
                 <b>Ответственный:</b>
@@ -30,16 +32,17 @@ export async function renderUpdateTask(spaceId, taskId) {
             
             <label>
                 <b>Дедлайн:</b>
-                <input class="input" type="date" name="next_due_date" required min="2026-01-01">
+                <input class="input" type="date" name="next_due_date" required min="2026-01-01"
+                    value="${task.next_due_date.split('T')[0]}">
             </label>
             
             <label class="checkbox-label">
-                <input type="checkbox" name="is_recurring" id="recurring-check"> 
+                <input type="checkbox" name="is_recurring" id="recurring-check" ${task.is_recurring ? "checked" : ""}> 
                 <b>Является регулярной?</b>
             </label>
             
             <input class="input" type="number" name="frequency_days" id="freq-input" 
-                   placeholder="Период (в днях)" style="display:none" min="1" max="365">
+                   placeholder="Период (в днях)" style="display:none" min="1" max="365" value="${task.frequency_days}">
                    
             
             <button class="button primary" id="updateTaskBtn">
@@ -57,6 +60,7 @@ export async function renderUpdateTask(spaceId, taskId) {
     const select = document.createElement("select");
     select.name = "username";
     select.required = true;
+    select.value = task.assignee_name;
 
     label.appendChild(select);
 
@@ -73,6 +77,11 @@ export async function renderUpdateTask(spaceId, taskId) {
         const option = document.createElement("option");
         option.value = member;
         option.text = member;
+
+        if (member === task.assignee_name) {
+            option.selected = true;
+        }
+
         select.appendChild(option);
     });
 
@@ -82,8 +91,11 @@ export async function renderUpdateTask(spaceId, taskId) {
     const check = document.getElementById("recurring-check");
     const freqInput = document.getElementById("freq-input");
 
+    freqInput.style.display = check.checked ? "block" : "none";
+
     check.addEventListener("change", (e) => {
         freqInput.style.display = e.target.checked ? "block" : "none";
+        freqInput.required = e.target.checked;
     });
 
     const button = document.getElementById("deleteTaskBtn");
@@ -107,10 +119,13 @@ export async function renderUpdateTask(spaceId, taskId) {
 
         const assignee_id = await getIdByUsername(data.username)
 
+        const isRecurring = document.getElementById("recurring-check").checked;
+        const frequency = parseInt(data.frequency_days);
+
         const taskData = {
             title: data.title,
             is_recurring: !!data.is_recurring,
-            frequency_days: parseInt(data.frequency_days) || 0,
+            frequency_days: isRecurring ? frequency : 0,
             assignee_id: assignee_id,
             next_due_date: data.next_due_date
         };

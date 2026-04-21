@@ -36,7 +36,7 @@ export async function renderSpace(id){
                 Выполнить
             </button>
 
-            <button class="button secondary update-btn" onclick="location.hash='update-task/${id}/${task.id}'">
+            <button class="button secondary update-btn" data-task='${JSON.stringify(task)}'>
                 Изменить
             </button>
         </div>
@@ -54,7 +54,7 @@ export async function renderSpace(id){
                 Выполнить
             </button>
             
-            <button class="button secondary update-btn update-overdue" onclick="location.hash='update-task/${id}/${task.id}'">
+            <button class="button secondary update-btn update-overdue" data-task='${JSON.stringify(task)}'>
                 Изменить
             </button>
         </div>
@@ -187,7 +187,15 @@ export async function renderSpace(id){
                 alert("Не удалось отметить задачу как выполненную");
             }
         })
-    })
+    });
+
+    document.querySelectorAll('.update-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const task = JSON.parse(e.target.dataset.task);
+            localStorage.setItem('current-task', JSON.stringify(task));
+            location.hash = `update-task/${id}/${task.id}`;
+        });
+    });
 }
 
 export function getSpaceById(id) {

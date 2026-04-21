@@ -76,6 +76,7 @@ export async function renderCreateTask(spaceId){
 
     check.addEventListener("change", (e) => {
         freqInput.style.display = e.target.checked ? "block" : "none";
+        freqInput.required = e.target.checked;
     });
 
     const form = document.querySelector(".create-task-form");
@@ -87,10 +88,13 @@ export async function renderCreateTask(spaceId){
 
         const assignee_id = await getIdByUsername(data.username)
 
+        const isRecurring = document.getElementById("recurring-check").checked;
+        const frequency = parseInt(data.frequency_days);
+
         const taskData = {
             title: data.title,
             is_recurring: !!data.is_recurring,
-            frequency_days: parseInt(data.frequency_days) || 0,
+            frequency_days: isRecurring ? frequency : 0,
             assignee_id: assignee_id,
             next_due_date: data.next_due_date
         };
