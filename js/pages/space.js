@@ -102,7 +102,7 @@ export async function renderSpace(id){
                         <span class="arrow left"></span>
                     </button>
 
-                    <span class="page-info">Page ${currentPage} / ${totalPagesText}</span>
+                    <span class="page-info">Страница ${currentPage} / ${totalPagesText}</span>
 
                     <button class="page-btn next" ${currentPage === totalPages ? "disabled" : ""}>
                         <span class="arrow right"></span>
@@ -134,7 +134,7 @@ export async function renderSpace(id){
     app.innerHTML = `
         ${Navbar()}
 
-        <div class="container">
+        <div class="container your-spaces">
 
             <button class="button back" onclick="location.hash = 'dashboard'" style="margin-bottom:20px">
                 Отмена
@@ -163,7 +163,7 @@ export async function renderSpace(id){
 
             <br>
 
-            <h3>History</h3>
+            <h3>История</h3>
 
             <div class="card" id="history-container"></div>
             <div id="history-pagination-container"></div>

@@ -12,7 +12,7 @@ export function renderProfile(){
     
     <div class="container">
     
-        <button class="button back" onclick="history.back()" style="margin-bottom:20px">
+        <button class="button back" onclick="history.back()" style="margin-bottom:20px;">
             Отмена
         </button>
     
