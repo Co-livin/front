@@ -323,3 +323,11 @@ select:valid {
     background: lightcoral;
     color: white;
 }
+
+.overdue {
+    background: rgba(255, 22, 22, 0.12);
+}
+
+.overdue-button {
+    background: lightcoral;
+}
