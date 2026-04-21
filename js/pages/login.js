@@ -10,7 +10,7 @@ export function renderLogin(){
     
         <div class="card center-card">
         
-            <h2 class="page-title">Login</h2>
+            <h2 class="page-title">Авторизация</h2>
             
             <form class="login-form">
             

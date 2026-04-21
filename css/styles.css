@@ -384,12 +384,6 @@ select:valid {
     background: lightcoral;
     color: white;
     font-size: 14px;
-    transition: 0.2s;
-}
-
-.profile-menu button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 0 0 3px rgba(255, 138, 101, 0.15);
 }
 
 .hidden {

@@ -137,7 +137,7 @@ export async function renderSpace(id){
         <div class="container your-spaces">
 
             <button class="button back" onclick="location.hash = 'dashboard'" style="margin-bottom:20px">
-                Отмена
+                ← Назад
             </button>
 
             <h2 class="page-title">Пространство ${space.name}</h2>
@@ -151,14 +151,14 @@ export async function renderSpace(id){
             <h3>Активные задачи</h3>
 
             <div class="grid">
-                ${tasksHTML || "<p>У вас пока нет задач.</p>"}
+                ${tasksHTML || "<p>У вас пока нет задач</p>"}
             </div>
 
             <br>
 
             <h3>Просроченные задачи</h3>
             <div class="grid">
-                ${overdueHTML || "<p>Нет просроченных задач 🎉</p>"}
+                ${overdueHTML || "<p>Нет просроченных задач</p>"}
             </div>
 
             <br>
