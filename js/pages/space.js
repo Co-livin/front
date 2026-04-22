@@ -28,7 +28,7 @@ export async function renderSpace(id){
         <div class="card">
             <h3>${task.title}</h3>
             <p>Ответственный: ${task.assignee_name}</p>
-            <p>Дедлайн: ${task.next_due_date}</p>
+            <p>Дедлайн: ${task.next_due_date.split('T')[0]}</p>
 
             <br>
 
@@ -46,7 +46,7 @@ export async function renderSpace(id){
         <div class="card overdue">
             <h3>${task.title}</h3>
             <p>Ответственный: ${task.assignee_name}</p>
-            <p>Дедлайн: ${task.next_due_date}</p>
+            <p>Дедлайн: ${task.next_due_date.split('T')[0]}</p>
 
             <br>
 
