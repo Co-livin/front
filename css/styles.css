@@ -397,3 +397,163 @@ select:valid {
 .card {
     overflow-wrap: anywhere;
 }
+
+
+@media (max-width: 768px) {
+    .profile-menu {
+        position: absolute;
+        top: 120%;
+        right: 0;
+        width: max-content;
+        min-width: 160px;
+        max-width: 90vw;
+
+        box-sizing: border-box;
+
+        overflow-wrap: break-word;
+        word-break: break-word;
+    }
+
+    .navbar {
+        flex-direction: row;
+        align-items: center;
+        padding: 15px;
+    }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-left: auto;
+    }
+
+    .nav-links button {
+        margin-left: 0;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    .container {
+        padding: 20px 15px;
+        font-size: 16px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .card h3 {
+        font-size: 18px;
+    }
+
+
+    .button {
+        font-size: 16px;
+        padding: 8px 12px;
+    }
+
+    .create-space,
+    .join-space {
+        padding: 20px 15px;
+        justify-content: flex-start;
+    }
+
+    .page-title.spacename,
+    .page-title.invite-space {
+        font-size: 26px;
+    }
+
+    .content-card {
+        padding: 20px;
+    }
+
+    .input {
+        font-size: 16px;
+        height: 38px;
+    }
+
+    input::placeholder {
+        font-size: 14px;
+    }
+
+    select,
+    .input[name="title"],
+    .input[type="number"] {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    input[type="date"] {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    button.back-button {
+        position: static;
+        align-self: flex-start;
+        padding: 6px 10px;
+        margin-bottom: 5px;
+    }
+
+    .pagination {
+        gap: 10px;
+    }
+
+    .page-btn {
+        width: 35px;
+        height: 35px;
+    }
+
+    .profile-wrapper {
+        position: relative;
+    }
+
+    button[id="createSpaceBtn"],
+    button[id="joinSpaceBtn"] {
+        font-size: 20px;
+    }
+
+    .create-task-form,
+    .update-task-form {
+        width: 100%;
+        gap: 12px;
+    }
+
+    .create-task-form label,
+    .update-task-form label {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .create-task-form select,
+    .update-task-form select,
+    .create-task-form input[type="date"],
+    .update-task-form input[type="date"] {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .due-date {
+        flex-direction: column !important;
+        align-items: flex-start;
+    }
+
+    .create-task-form .checkbox-label,
+    .update-task-form .checkbox-label {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 8px;
+    }
+
+    .create-task-form .checkbox-label input[type="checkbox"],
+    .update-task-form .checkbox-label input[type="checkbox"] {
+        margin-right: 0;
+    }
+}
