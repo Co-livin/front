@@ -84,6 +84,7 @@ body {
 
 .secondary, .back {
     background: #FFE0D6;
+    color: #333;
 }
 
 .success {
@@ -396,7 +397,6 @@ select:valid {
         position: absolute;
         top: 120%;
         right: 0;
-
         width: max-content;
         min-width: 160px;
         max-width: 90vw;
