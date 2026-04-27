@@ -23,7 +23,7 @@ export async function renderUpdateTask(spaceId, taskId) {
         
         <form class="update-task-form">
         
-            <input class="input" name="title" placeholder="Название" minlength="2" maxlength="20" required
+            <input class="input" name="title" placeholder="Название" minlength="2" maxlength="150" required
                 value="${task.title}">
             
             <label id="assignee-label">

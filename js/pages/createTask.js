@@ -16,7 +16,7 @@ export async function renderCreateTask(spaceId){
         <h2 class="page-title">Создать задачу</h2>
         <form class="create-task-form">
  
-            <input class="input" name="title" placeholder="Название" minlength="2" maxlength="20" required>
+            <input class="input" name="title" placeholder="Название" minlength="2" maxlength="150" required>
      
             <label id="assignee-label">
                 <b>Ответственный:</b>
