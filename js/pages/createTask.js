@@ -10,34 +10,36 @@ export async function renderCreateTask(spaceId){
     ${Navbar()}
     
     <div class="container create-task">
-        <button class="button back" onclick="location.hash = 'space/${spaceId}'" style="margin-bottom: 30px">
+        <button class="button back-button" onclick="location.hash = 'space/${spaceId}'" style="margin-bottom: 30px">
             Отмена
         </button>
-        <h2 class="page-title">Создать задачу</h2>
-        <form class="create-task-form">
- 
-            <input class="input" name="title" placeholder="Название" minlength="2" maxlength="150" required>
+        <div class="content-card">
+            <h2 class="page-title">Создать задачу</h2>
+            <form class="create-task-form">
      
-            <label id="assignee-label">
-                <b>Ответственный:</b>
-            </label>
-            <label class="due-date">
-                <b>Дедлайн:</b>
-                <input class="input" type="date" name="next_due_date" required min="2026-01-01">
-            </label>
-            
-            <label class="checkbox-label">
-                <input type="checkbox" name="is_recurring" id="recurring-check"> 
-                <b>Является регулярной?</b>
-            </label>
-            
-            <input class="input" type="number" name="frequency_days" id="freq-input" 
-                   placeholder="Период (в днях)" style="display:none" min="1" max="365">
-                   
-            <button class="button primary" id="createTaskBtn">
-                Создать
-            </button>
-        </form>
+                <input class="input" name="title" placeholder="Название" minlength="2" maxlength="150" required>
+         
+                <label id="assignee-label">
+                    <b>Ответственный:</b>
+                </label>
+                <label class="due-date">
+                    <b>Дедлайн:</b>
+                    <input class="input" type="date" name="next_due_date" required min="2026-01-01">
+                </label>
+                
+                <label class="checkbox-label">
+                    <input type="checkbox" name="is_recurring" id="recurring-check"> 
+                    <b>Является регулярной?</b>
+                </label>
+                
+                <input class="input" type="number" name="frequency_days" id="freq-input" 
+                       placeholder="Период (в днях)" style="display:none" min="1" max="365">
+                       
+                <button class="button primary" id="createTaskBtn">
+                    Создать
+                </button>
+            </form>
+        </div>
     </div>
     
     `;

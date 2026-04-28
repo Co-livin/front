@@ -31,14 +31,15 @@ export async function renderSpace(id){
             <p>Дедлайн: ${task.next_due_date.split('T')[0]}</p>
 
             <br>
-
-            <button class="button success mark-done-btn" data-id="${task.id}">
-                Выполнить
-            </button>
-
-            <button class="button secondary update-btn" data-task='${JSON.stringify(task)}'>
-                Изменить
-            </button>
+            <div class="task-buttons">
+                <button class="button success mark-done-btn" data-id="${task.id}">
+                    Выполнить
+                </button>
+    
+                <button class="button secondary update-btn" data-task='${JSON.stringify(task)}'>
+                    Изменить
+                </button>
+            </div>
         </div>
     `).join('');
 
@@ -49,14 +50,15 @@ export async function renderSpace(id){
             <p>Дедлайн: ${task.next_due_date.split('T')[0]}</p>
 
             <br>
-
-            <button class="button success mark-done-btn overdue-button" data-id="${task.id}">
-                Выполнить
-            </button>
-            
-            <button class="button secondary update-btn update-overdue" data-task='${JSON.stringify(task)}'>
-                Изменить
-            </button>
+            <div class="task-buttons">
+                <button class="button success mark-done-btn overdue-button" data-id="${task.id}">
+                    Выполнить
+                </button>
+                
+                <button class="button secondary update-btn update-overdue" data-task='${JSON.stringify(task)}'>
+                    Изменить
+                </button>
+            </div>
         </div>
     `).join('');
 

@@ -9,6 +9,8 @@ export function Navbar(){
         </div>
         
         <div class="nav-links">
+            <a class="nav-link" href="https://forms.gle/FXtwKj416MPqszNHA" target="_blank">Обратная связь</a>
+            
             <button onclick="location.hash='dashboard'">
                 Пространства
             </button>

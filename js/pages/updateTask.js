@@ -11,44 +11,46 @@ export async function renderUpdateTask(spaceId, taskId) {
     
     <div class="container">
     
-        <button class="button back" onclick="location.hash = 'space/${spaceId}'" style="margin-bottom: 30px">
+        <button class="button back-button" onclick="location.hash = 'space/${spaceId}'" style="margin-bottom: 30px">
             Отмена
         </button>
         
-        <button class="button delete" id="deleteTaskBtn">
-            Удалить
-        </button> 
-        
-        <h2 class="page-title">Редактировать задачу</h2>
-        
-        <form class="update-task-form">
-        
-            <input class="input" name="title" placeholder="Название" minlength="2" maxlength="150" required
-                value="${task.title}">
+        <div class="content-card">
+            <h2 class="page-title">Редактировать задачу</h2>
             
-            <label id="assignee-label">
-                <b>Ответственный:</b>
-            </label>
+            <form class="update-task-form">
             
-            <label>
-                <b>Дедлайн:</b>
-                <input class="input" type="date" name="next_due_date" required min="2026-01-01"
-                    value="${task.next_due_date.split('T')[0]}">
-            </label>
-            
-            <label class="checkbox-label">
-                <input type="checkbox" name="is_recurring" id="recurring-check" ${task.is_recurring ? "checked" : ""}> 
-                <b>Является регулярной?</b>
-            </label>
-            
-            <input class="input" type="number" name="frequency_days" id="freq-input" 
-                   placeholder="Период (в днях)" style="display:none" min="1" max="365" value="${task.frequency_days}">
-                   
-            
-            <button class="button primary" id="updateTaskBtn">
-                Обновить
-            </button>        
-        </form>   
+                <input class="input" name="title" placeholder="Название" minlength="2" maxlength="150" required
+                    value="${task.title}">
+                
+                <label id="assignee-label">
+                    <b>Ответственный:</b>
+                </label>
+                
+                <label>
+                    <b>Дедлайн:</b>
+                    <input class="input" type="date" name="next_due_date" required min="2026-01-01"
+                        value="${task.next_due_date.split('T')[0]}">
+                </label>
+                
+                <label class="checkbox-label">
+                    <input type="checkbox" name="is_recurring" id="recurring-check" ${task.is_recurring ? "checked" : ""}> 
+                    <b>Является регулярной?</b>
+                </label>
+                
+                <input class="input" type="number" name="frequency_days" id="freq-input" 
+                       placeholder="Период (в днях)" style="display:none" min="1" max="365" value="${task.frequency_days}">
+                       
+                <div class="buttons">
+                    <button class="button primary" id="updateTaskBtn">
+                        Обновить
+                    </button>       
+                    <button class="button delete" id="deleteTaskBtn">
+                        Удалить
+                    </button>  
+                </div>
+            </form>
+        </div>
     </div>
     
     `;

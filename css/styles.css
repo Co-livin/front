@@ -50,6 +50,8 @@ body {
 
 /* main cards in dashboard*/
 .card {
+    display: flex;
+    flex-direction: column;
     background: white;
     border-radius: 12px;
     padding: 20px;
@@ -398,6 +400,19 @@ select:valid {
     overflow-wrap: anywhere;
 }
 
+.nav-link {
+    color: rgba(255, 255, 255, 0.88);
+    text-decoration: none;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.task-buttons {
+    margin-top: auto;
+}
 
 @media (max-width: 768px) {
     .profile-menu {
