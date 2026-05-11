@@ -106,6 +106,7 @@ export async function renderSpace(id){
 
                     <span class="page-info">Страница ${currentPage} / ${totalPagesText}</span>
 
+
                     <button class="page-btn next" ${currentPage === totalPages ? "disabled" : ""}>
                         <span class="arrow right"></span>
                     </button>
@@ -140,6 +141,9 @@ export async function renderSpace(id){
 
             <button class="button back" onclick="location.hash = 'dashboard'" style="margin-bottom:20px">
                 ← Назад
+            </button>
+            <button class="button delete" id="deleteSpaceBtn">
+                Удалить пространство
             </button>
 
             <h2 class="page-title">Пространство ${space.name}</h2>
@@ -176,6 +180,11 @@ export async function renderSpace(id){
     initNavbar();
 
     initHistoryPagination(events);
+
+    const deleteSpaceBtn = document.getElementById("deleteSpaceBtn");
+    deleteSpaceBtn.addEventListener("click", (e) => {
+        deleteSpace(id);
+    })
 
     const doneButtons = app.querySelectorAll('.mark-done-btn');
     doneButtons.forEach(button => {
@@ -238,6 +247,7 @@ export async function markCompleted(taskId) {
                 'Accept': 'application/json'
             }
         });
+        
 
         if (!response.ok) throw new Error(await response.text());
     } catch (error) {
@@ -323,6 +333,30 @@ export async function getOverdueTasks(spaceId) {
 
     } catch (error) {
         console.error("Ошибка при получении просроченных задач:", error);
+        throw error;
+    }
+}
+
+async function deleteSpace(id) {
+    const token = localStorage.getItem("access_token");
+
+    try {
+        const response = await fetch(
+            `https://colivin.ru/api/spaces/${id}`,
+            {
+                method: "DELETE",
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Accept': 'application/json'
+                },
+            }
+        );
+        if (!response.ok) {
+            throw new Error(await response.text());
+        }
+        location.hash = 'dashboard';
+    } catch (error) {
+        console.error("Ошибка при удалении задачи:", error);
         throw error;
     }
 }

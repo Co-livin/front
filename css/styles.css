@@ -179,6 +179,11 @@ button.back-button {
     margin: auto;
 }
 
+.description {
+    background: #FFE0D6;
+    white-space: pre-line;
+}
+
 /* create/update task*/
 
 .create-task, .create-task-form, .update-task-form {
@@ -244,6 +249,8 @@ select {
     padding: 5px;
     margin-left: 10px;
 }
+
+
 
 select:invalid {
     color: #888;
@@ -449,6 +456,7 @@ select:valid {
     }
 
     .container {
+        display: flex;
         padding: 20px 15px;
         font-size: 16px;
     }
@@ -506,6 +514,7 @@ select:valid {
         margin-left: 0;
         width: 100%;
     }
+
 
     button.back-button {
         position: static;

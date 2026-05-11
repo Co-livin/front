@@ -20,11 +20,16 @@
                 <input class="input" name="password" type="password" placeholder="Пароль" minlength="8" maxlength="16">
             
                 <button class="button primary" type="submit" id="button-register">
-                    Зарегистироваться
+                    Зарегистрироваться
                 </button>
             </form>
         </div>
-    
+        
+        <br>
+        
+        <div class="card center-card description">Описание нашего проекта
+            Наш проект очень крутой кстати
+        </div>
     </div>
     
     `;

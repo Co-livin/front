@@ -31,6 +31,12 @@ export function renderLogin(){
             </button>
         
         </div>
+        
+        <br>
+        
+        <div class="card center-card description">Описание нашего проекта
+            Наш проект очень крутой кстати
+        </div>
     
     </div>
     
