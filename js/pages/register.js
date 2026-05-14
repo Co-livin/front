@@ -7,7 +7,7 @@
     <div class="container">
     
         <button class="button back" onclick="location.hash = 'login'" style="margin-bottom:20px">
-            Отмена
+            ← Назад
         </button>
     
         <div class="card center-card">
@@ -27,8 +27,8 @@
         
         <br>
         
-        <div class="card center-card description">Описание нашего проекта
-            Наш проект очень крутой кстати
+        <div class="card center-card description">
+            <strong>Coli</strong> — трекер для организации бытовых дел для тех, кто живет или работает вместе
         </div>
     </div>
     

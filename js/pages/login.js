@@ -34,8 +34,8 @@ export function renderLogin(){
         
         <br>
         
-        <div class="card center-card description">Описание нашего проекта
-            Наш проект очень крутой кстати
+        <div class="card center-card description">
+            <strong>Coli</strong> — трекер для организации бытовых дел для тех, кто живет или работает вместе
         </div>
     
     </div>
