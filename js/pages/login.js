@@ -14,9 +14,9 @@ export function renderLogin(){
             
             <form class="login-form">
             
-                <input class="input" name="username" placeholder="Логин" minlength="4" maxlength="16">
+                <input class="input" name="username" placeholder="Логин" minlength="4" maxlength="16" required>
                 
-                <input class="input" type="password" name="password" placeholder="Пароль" minlength="8" maxlength="16">
+                <input class="input" type="password" name="password" placeholder="Пароль" minlength="8" maxlength="16" required>
                 
                 <button class="button primary" type="submit" id="button-login">
                     Войти

@@ -13,7 +13,7 @@ export function renderJoinSpace(){
         <div class="content-card">
             <h2 class="page-title invite-space">Введите код для входа в пространство</h2>
             <form class="join-space-form">
-                <input class="input" name="invite_code" placeholder="Инвайт-код" maxlength="10">
+                <input class="input" name="invite_code" placeholder="Инвайт-код" maxlength="10" required>
                
                 <button class="button primary" type="submit" id="joinSpaceBtn">
                     Присоединиться

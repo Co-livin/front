@@ -15,9 +15,9 @@
             <h2 class="page-title">Регистрация</h2>
             
             <form class="register-form">
-                <input class="input" name="login" placeholder="Логин" minlength="4" maxlength="16">
-                <input class="input" name="name" placeholder="Имя" minlength="2" maxlength="16">
-                <input class="input" name="password" type="password" placeholder="Пароль" minlength="8" maxlength="16">
+                <input class="input" name="login" placeholder="Логин" minlength="4" maxlength="16" required>
+                <input class="input" name="name" placeholder="Имя" minlength="2" maxlength="16" required>
+                <input class="input" name="password" type="password" placeholder="Пароль" minlength="8" maxlength="16" required>
             
                 <button class="button primary" type="submit" id="button-register">
                     Зарегистрироваться
