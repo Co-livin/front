@@ -12,6 +12,15 @@ export function router(){
 
     const hash=location.hash;
 
+    const token = localStorage.getItem("access_token")
+
+    const publicRoutes = ["#login", "#register", ""]
+
+    if (!token && !publicRoutes.includes(hash)) {
+        location.hash = "login"
+        return
+    }
+
     if(hash.startsWith("#space/")){
         const id= parseInt(hash.split("/")[1], 10);
         renderSpace(id);

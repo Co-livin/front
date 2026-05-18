@@ -23,7 +23,7 @@ export function Navbar(){
                 <div id="profile-menu" class="profile-menu hidden">
                     <div class="login">Логин: ${login}</div>
                     <div>Имя: ${name}</div>
-                    <button onclick="location.hash='login'">
+                    <button onclick="logout()">
                         Выйти
                     </button>
                 </div>
@@ -48,4 +48,10 @@ window.toggleProfileMenu = function(event) {
     event.stopPropagation();
     const menu = document.getElementById("profile-menu");
     menu.classList.toggle("hidden");
+}
+
+window.logout = function() {
+    localStorage.clear();
+    location.hash = "login";
+    location.reload();
 }
