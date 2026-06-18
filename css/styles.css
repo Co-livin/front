@@ -619,3 +619,122 @@ select:valid {
         margin-right: 0;
     }
 }
+
+/*Темная тема*/
+
+body.dark-theme {
+    background: #1B1D22;
+    color: #EAEAEA;
+}
+
+body.dark-theme .navbar {
+    background: #2A2D34;
+}
+
+body.dark-theme .nav-link,
+body.dark-theme .nav-links button {
+    color: rgba(255,255,255,0.9);
+}
+
+body.dark-theme .card,
+body.dark-theme .content-card,
+body.dark-theme .profile-menu {
+    background: #2A2D34;
+    color: #EAEAEA;
+    border-color: #3A3F48;
+}
+
+body.dark-theme .profile-menu div {
+    color: #EAEAEA;
+}
+
+body.dark-theme input,
+body.dark-theme select {
+    background: #343841;
+    color: #EAEAEA;
+    border: 1px solid #4A4F58;
+}
+
+body.dark-theme input::placeholder {
+    color: #A9ADB5;
+}
+
+body.dark-theme select:valid,
+body.dark-theme input[type="date"]:valid {
+    color: #EAEAEA;
+}
+
+body.dark-theme .description,
+body.dark-theme .secondary,
+body.dark-theme .back {
+    background: #3A3F48;
+    color: #EAEAEA;
+}
+
+body.dark-theme .page-btn {
+    background: #343841;
+    border-color: #4A4F58;
+}
+
+body.dark-theme .page-info {
+    color: #B7BCC5;
+}
+
+body.dark-theme .arrow {
+    border-color: #EAEAEA;
+}
+
+body.dark-theme .history-item {
+    border-bottom-color: #3A3F48;
+}
+
+body.dark-theme .overdue {
+    background: rgba(255, 99, 99, 0.15);
+}
+
+body.dark-theme .update-overdue {
+    background: rgba(255, 120, 120, 0.2);
+}
+
+body.dark-theme .primary,
+body.dark-theme .open {
+    background: #FF8A65;
+    color: white;
+}
+
+body.dark-theme .success {
+    background: #4CAF50;
+}
+
+body.dark-theme .delete,
+body.dark-theme .overdue-button,
+body.dark-theme .profile-menu button:not(.theme-btn) {
+    background: #E57373;
+    color: white;
+}
+
+.profile-menu .theme-btn {
+    background: #FFE0D6;
+    color: #333;
+}
+
+body.dark-theme .theme-btn {
+    background: #FFB74D;
+    color: #222;
+}
+
+body.dark-theme h1,
+body.dark-theme h2,
+body.dark-theme h3,
+body.dark-theme h4,
+body.dark-theme label,
+body.dark-theme p,
+body.dark-theme span,
+body.dark-theme div {
+    color: inherit;
+}
+
+body.dark-theme input,
+body.dark-theme select {
+    color: #EAEAEA !important;
+}

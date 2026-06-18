@@ -23,6 +23,9 @@ export function Navbar(){
                 <div id="profile-menu" class="profile-menu hidden">
                     <div class="login">Логин: ${login}</div>
                     <div>Имя: ${name}</div>
+                    <button class="theme-btn" onclick="toggleTheme()">
+                        Темная тема
+                    </button>
                     <button onclick="logout()">
                         Выйти
                     </button>
@@ -41,6 +44,14 @@ export function initNavbar() {
                 menu.classList.add("hidden");
             }
         });
+
+        const savedTheme = localStorage.getItem("theme");
+
+        if (savedTheme === "dark") {
+            document.body.classList.add("dark-theme");
+        }
+
+        updateThemeButton();
     });
 }
 
@@ -54,4 +65,25 @@ window.logout = function() {
     localStorage.clear();
     location.hash = "login";
     location.reload();
+}
+
+window.toggleTheme = function() {
+    const isDark = document.body.classList.toggle("dark-theme");
+
+    localStorage.setItem(
+        "theme",
+        isDark ? "dark" : "light"
+    );
+
+    updateThemeButton();
+}
+
+function updateThemeButton() {
+    const btn = document.querySelector(".theme-btn");
+
+    if (!btn) return;
+
+    const dark = document.body.classList.contains("dark-theme");
+
+    btn.textContent = dark ? "Светлая тема" : "Темная тема";
 }
