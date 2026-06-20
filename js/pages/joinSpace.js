@@ -6,11 +6,11 @@ export function renderJoinSpace(){
     app.innerHTML=`
     ${Navbar()}
     
-    <div class="container join-space">
+    <main class="container join-space">
         <button class="button back-button" onclick="location.hash = 'dashboard'">
             Отмена
         </button>
-        <div class="content-card">
+        <article class="content-card">
             <h2 class="page-title invite-space">Введите код для входа в пространство</h2>
             <form class="join-space-form">
                 <input class="input" name="invite_code" placeholder="Инвайт-код" maxlength="10" required>
@@ -19,8 +19,8 @@ export function renderJoinSpace(){
                     Присоединиться
                 </button>
             </form>
-        </div>
-    </div>
+        </article>
+    </main>
     `;
 
     initNavbar();

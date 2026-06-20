@@ -6,11 +6,11 @@ export function renderCreateSpace(){
     app.innerHTML=`
     ${Navbar()}
     
-    <div class="container create-space">
+    <main class="container create-space">
         <button class="button back-button" onclick="location.hash = 'dashboard'">
             Отмена
         </button>
-        <div class="content-card">
+        <article class="content-card">
             <h2 class="page-title spacename">Назовите своё пространство</h2>
             <form class="add-space-form">
                 <label>
@@ -21,8 +21,8 @@ export function renderCreateSpace(){
                     Продолжить
                 </button>
             </form>
-        </div>
-    </div>
+        </article>
+    </main>
     `;
 
     initNavbar();

@@ -1,26 +1,36 @@
 import {Navbar, initNavbar} from "../components/navbar.js"
 
 export async function renderDashboard(){
+    const app=document.getElementById("app");
+
+    app.innerHTML = `
+    <main class="container">
+        <p>Загрузка...</p>
+    </main>
+    `;
 
     let spaces = await getCurrentSpaces();
 
     const spacesHtml = spaces.map(space => `
-        <div class="card main">
-                <h3>${space.name}</h3>
-                <p>Инвайт-код: ${space.invite_code}</p>
+        <article class="card main">
+            <h3>${space.name}</h3>
+            <p>Инвайт-код: ${space.invite_code}</p>
+            <div>
                 <button class="button open" onclick="location.hash='space/${space.id}'">
                     Открыть
                 </button>
+                <button class="button secondary copy-btn" data-invite="${space.invite_code}">
+                    Скопировать код
+                </button>            
             </div>
+        </article>
     `).join('');
-
-    const app=document.getElementById("app");
 
     app.innerHTML=`
 
     ${Navbar()}
     
-    <div class="container">
+    <main class="container">
     
         <h2 class="page-title">Твои пространства</h2>
         
@@ -35,16 +45,35 @@ export async function renderDashboard(){
         <br><br>
         
         <div class="grid">
-        
             ${spacesHtml || "<p>У вас пока нет пространств.</p>"}
-        
         </div>
     
-    </div>
+    </main>
     
     `;
 
     initNavbar();
+
+    document.querySelectorAll(".copy-btn").forEach(button => {
+        button.addEventListener("click", async () => {
+            try {
+                await navigator.clipboard.writeText(
+                    button.dataset.invite
+                );
+
+                const oldText = button.textContent;
+
+                button.textContent = "Скопировано";
+
+                setTimeout(() => {
+                    button.textContent = oldText;
+                }, 1500);
+
+            } catch (error) {
+                alert("Не удалось скопировать код");
+            }
+        });
+    });
 }
 
 export async function getCurrentSpaces() {

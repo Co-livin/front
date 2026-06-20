@@ -4,13 +4,13 @@
 
     app.innerHTML=`
 
-    <div class="container">
+    <main class="container">
     
         <button class="button back" onclick="location.hash = 'login'" style="margin-bottom:20px">
             ← Назад
         </button>
     
-        <div class="card center-card">
+        <article class="card center-card">
         
             <h2 class="page-title">Регистрация</h2>
             
@@ -23,14 +23,14 @@
                     Зарегистрироваться
                 </button>
             </form>
-        </div>
+        </article>
         
         <br>
         
-        <div class="card center-card description">
+        <article class="card center-card description">
             <strong>Coli</strong> — трекер для организации бытовых дел для тех, кто живет или работает вместе
-        </div>
-    </div>
+        </article>
+    </main>
     
     `;
 

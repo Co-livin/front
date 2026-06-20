@@ -1,4 +1,4 @@
-﻿import {Navbar, initNavbar} from "../components/navbar.js";
+﻿import {initNavbar, Navbar} from "../components/navbar.js";
 import {getIdByUsername, getSpaceMembers} from "./createTask.js";
 
 export async function renderUpdateTask(spaceId, taskId) {
@@ -9,13 +9,13 @@ export async function renderUpdateTask(spaceId, taskId) {
 
     ${Navbar()}
     
-    <div class="container">
+    <main class="container">
     
         <button class="button back-button" onclick="location.hash = 'space/${spaceId}'" style="margin-bottom: 30px">
             Отмена
         </button>
         
-        <div class="content-card">
+        <article class="content-card">
             <h2 class="page-title">Редактировать задачу</h2>
             
             <form class="update-task-form">
@@ -29,7 +29,7 @@ export async function renderUpdateTask(spaceId, taskId) {
                 
                 <label>
                     <b>Дедлайн:</b>
-                    <input class="input" type="date" name="next_due_date" required min="2026-01-01"
+                    <input class="input" type="date" name="next_due_date" required
                         value="${task.next_due_date.split('T')[0]}">
                 </label>
                 
@@ -45,13 +45,13 @@ export async function renderUpdateTask(spaceId, taskId) {
                     <button class="button primary" id="updateTaskBtn">
                         Обновить
                     </button>       
-                    <button class="button delete" id="deleteTaskBtn">
+                    <button type="button" class="button delete" id="deleteTaskBtn">
                         Удалить
                     </button>  
                 </div>
             </form>
-        </div>
-    </div>
+        </article>
+    </main>
     
     `;
 
@@ -90,10 +90,13 @@ export async function renderUpdateTask(spaceId, taskId) {
     const titleInput = document.querySelector('input[name="title"]');
     titleInput.after(label);
 
+    document.querySelector('[name="next_due_date"]').min = new Date().toISOString().split("T")[0];
+
     const check = document.getElementById("recurring-check");
     const freqInput = document.getElementById("freq-input");
 
     freqInput.style.display = check.checked ? "block" : "none";
+    freqInput.required = check.checked;
 
     check.addEventListener("change", (e) => {
         freqInput.style.display = e.target.checked ? "block" : "none";
@@ -111,7 +114,6 @@ export async function renderUpdateTask(spaceId, taskId) {
     })
 
     const form = document.querySelector(".update-task-form");
-    form.addEventListener("submit", (e) => {})
 
     form.addEventListener("submit", async (event) => {
         event.preventDefault();

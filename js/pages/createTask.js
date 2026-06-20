@@ -9,11 +9,11 @@ export async function renderCreateTask(spaceId){
 
     ${Navbar()}
     
-    <div class="container create-task">
+    <main class="container create-task">
         <button class="button back-button" onclick="location.hash = 'space/${spaceId}'" style="margin-bottom: 30px">
             Отмена
         </button>
-        <div class="content-card">
+        <article class="content-card">
             <h2 class="page-title">Создать задачу</h2>
             <form class="create-task-form">
      
@@ -24,7 +24,7 @@ export async function renderCreateTask(spaceId){
                 </label>
                 <label class="due-date">
                     <b>Дедлайн:</b>
-                    <input class="input" type="date" name="next_due_date" required min="2026-01-01">
+                    <input class="input" type="date" name="next_due_date" required>
                 </label>
                 
                 <label class="checkbox-label">
@@ -39,8 +39,8 @@ export async function renderCreateTask(spaceId){
                     Создать
                 </button>
             </form>
-        </div>
-    </div>
+        </article>
+    </main>
     
     `;
 
@@ -72,6 +72,8 @@ export async function renderCreateTask(spaceId){
 
     const titleInput = document.querySelector('input[name="title"]');
     titleInput.after(label);
+
+    document.querySelector('[name="next_due_date"]').min = new Date().toISOString().split("T")[0];
 
     const check = document.getElementById("recurring-check");
     const freqInput = document.getElementById("freq-input");

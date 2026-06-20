@@ -6,9 +6,9 @@ export function renderLogin(){
 
     app.innerHTML=`
 
-    <div class="container">
+    <main class="container">
     
-        <div class="card center-card">
+        <article class="card center-card">
         
             <h2 class="page-title">Авторизация</h2>
             
@@ -30,15 +30,15 @@ export function renderLogin(){
                 Создать аккаунт
             </button>
         
-        </div>
+        </article>
         
         <br>
         
-        <div class="card center-card description">
+        <article class="card center-card description">
             <strong>Coli</strong> — трекер для организации бытовых дел для тех, кто живет или работает вместе
-        </div>
+        </article>
     
-    </div>
+    </main>
     
     `;
 

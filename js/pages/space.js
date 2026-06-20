@@ -1,8 +1,16 @@
 import {Navbar, initNavbar} from "../components/navbar.js"
 
 export async function renderSpace(id){
+    const app = document.getElementById("app");
+
+    app.innerHTML = `
+    <main class="container">
+        <p>Загрузка...</p>
+    </main>
+    `;
+
     let tasks = await getUpcomingTasks(id);
-    let overdueTasks = await getOverdueTasks(id); // <-- добавили
+    let overdueTasks = await getOverdueTasks(id);
 
     const space = await getSpaceById(id)
 
@@ -25,7 +33,7 @@ export async function renderSpace(id){
     }));
 
     const tasksHTML = tasksWithUsernames.map(task => `
-        <div class="card">
+        <article class="card">
             <h3>${task.title}</h3>
             <p>Ответственный: ${task.assignee_name}</p>
             <p>Дедлайн: ${task.next_due_date.split('T')[0]}</p>
@@ -40,11 +48,11 @@ export async function renderSpace(id){
                     Изменить
                 </button>
             </div>
-        </div>
+        </article>
     `).join('');
 
     const overdueHTML = overdueWithUsernames.map(task => `
-        <div class="card overdue">
+        <article class="card overdue">
             <h3>${task.title}</h3>
             <p>Ответственный: ${task.assignee_name}</p>
             <p>Дедлайн: ${task.next_due_date.split('T')[0]}</p>
@@ -59,7 +67,7 @@ export async function renderSpace(id){
                     Изменить
                 </button>
             </div>
-        </div>
+        </article>
     `).join('');
 
     const events = await getSpaceEvents(id);
@@ -100,14 +108,14 @@ export async function renderSpace(id){
 
             paginationContainer.innerHTML = `
                 <div class="pagination">
-                    <button class="page-btn prev" ${currentPage === 1 ? "disabled" : ""}>
+                    <button class="page-btn prev" ${currentPage === 1 ? "disabled" : ""} aria-label="Предыдущая страница">
                         <span class="arrow left"></span>
                     </button>
 
                     <span class="page-info">Страница ${currentPage} / ${totalPagesText}</span>
 
 
-                    <button class="page-btn next" ${currentPage === totalPages ? "disabled" : ""}>
+                    <button class="page-btn next" ${currentPage === totalPages ? "disabled" : ""} aria-label="Следующая страница">
                         <span class="arrow right"></span>
                     </button>
                 </div>
@@ -132,12 +140,10 @@ export async function renderSpace(id){
         renderPage();
     }
 
-    const app = document.getElementById("app");
-
     app.innerHTML = `
         ${Navbar()}
 
-        <div class="container your-spaces">
+        <main class="container your-spaces">
 
             <button class="button back" onclick="location.hash = 'dashboard'" style="margin-bottom:20px">
                 ← Назад
@@ -171,10 +177,10 @@ export async function renderSpace(id){
 
             <h3>История</h3>
 
-            <div class="card" id="history-container"></div>
+            <article class="card" id="history-container"></article>
             <div id="history-pagination-container"></div>
 
-        </div>
+        </main>
     `;
 
     initNavbar();

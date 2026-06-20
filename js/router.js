@@ -4,7 +4,6 @@ import {renderDashboard} from "./pages/dashboard.js"
 import {renderCreateSpace} from "./pages/createSpace.js"
 import {renderSpace} from "./pages/space.js"
 import {renderCreateTask} from "./pages/createTask.js"
-import {renderProfile} from "./pages/profile.js"
 import {renderJoinSpace} from "./pages/joinSpace.js";
 import {renderUpdateTask} from "./pages/updateTask.js";
 
@@ -54,10 +53,6 @@ export function router(){
             renderCreateSpace();
             break;
 
-        case "#profile":
-            renderProfile();
-            break;
-
         case "#join-space":
             renderJoinSpace();
             break;
@@ -66,5 +61,4 @@ export function router(){
             renderLogin();
             break;
     }
-
 }

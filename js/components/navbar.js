@@ -3,7 +3,7 @@ export function Navbar(){
     const name = localStorage.getItem("name");
 
     return`
-    <div class="navbar">
+    <nav class="navbar">
         <div class="logo" onclick="location.hash='dashboard'">
             COLI
         </div>
@@ -23,7 +23,7 @@ export function Navbar(){
                 <div id="profile-menu" class="profile-menu hidden">
                     <div class="login">Логин: ${login}</div>
                     <div>Имя: ${name}</div>
-                    <button class="theme-btn" onclick="toggleTheme()">
+                    <button class="theme-btn" onclick="toggleTheme()" aria-label="Переключить тему">
                         Темная тема
                     </button>
                     <button onclick="logout()">
@@ -32,27 +32,30 @@ export function Navbar(){
                 </div>
             </div>
         </div>
-    </div>
+    </nav>
     `;
 }
 
 export function initNavbar() {
-    setTimeout(() => {
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark-theme");
+    }
+
+    updateThemeButton();
+
+    if (!window.navbarInitialized) {
         document.addEventListener("click", () => {
             const menu = document.getElementById("profile-menu");
+
             if (menu) {
                 menu.classList.add("hidden");
             }
         });
 
-        const savedTheme = localStorage.getItem("theme");
-
-        if (savedTheme === "dark") {
-            document.body.classList.add("dark-theme");
-        }
-
-        updateThemeButton();
-    });
+        window.navbarInitialized = true;
+    }
 }
 
 window.toggleProfileMenu = function(event) {
