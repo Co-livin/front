@@ -14,7 +14,7 @@ export function renderCreateSpace(){
             <h2 class="page-title spacename">Назовите своё пространство</h2>
             <form class="add-space-form">
                 <label>
-                    <input class="input" name="name" placeholder="Название" minlength="2" maxlength="20" required>
+                    <input class="input" name="name" placeholder="Название" minlength="2" maxlength="40" required>
                 </label>
     
                 <button class="button primary" type="submit" id="createSpaceBtn">
